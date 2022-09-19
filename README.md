@@ -6,7 +6,7 @@ Regions of Indonesia
 
 ## Features
 
-- Support both [Dynamic API](https://github.com/regions-of-indonesia/api) & [Static API](https://github.com/regions-of-indonesia/api)
+- Support both [Dynamic API](https://github.com/regions-of-indonesia/api) & [Static API](https://github.com/regions-of-indonesia/static-api)
 - Search API for Dynamic API
 - [Javascript client SDK](https://github.com/regions-of-indonesia/client)
 - Documented with in-app [DEMO](https://regions-of-indonesia.netlify.app)
