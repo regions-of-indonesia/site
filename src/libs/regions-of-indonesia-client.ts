@@ -17,18 +17,6 @@ const driver = {
   },
 };
 
-// const delay = () =>
-//   new Promise<void>((resolve) => {
-//     setTimeout(resolve, 2000);
-//   });
-
-// const wait: Middleware = async (context, next) => {
-//   await delay();
-//   const data = await next();
-//   await delay();
-//   return data;
-// };
-
 const client = new RegionsOfIndonesiaClient({
   middlewares: [log(), cache(driver)],
 });
