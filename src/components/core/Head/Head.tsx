@@ -20,7 +20,20 @@ function Head(props: HeadProps) {
     <NextHead>
       <title>{title.current}</title>
       <meta name="title" content={title.current} />
-      {typeof description.current === "string" && <meta name="description" content={description.current} />}
+      {<meta name="description" content={description.current ?? title.current} />}
+
+      <meta property="og:type" content="website" />
+      <meta property="og:url" content="https://regions-of-indonesia.netlify.app/" />
+      <meta property="og:title" content="Regions of Indonesia" />
+      <meta property="og:description" content="Regions of Indonesia" />
+      <meta property="og:image" content="https://regions-of-indonesia.netlify.app/Cover.png" />
+
+      <meta property="twitter:card" content="summary_large_image" />
+      <meta property="twitter:url" content="https://regions-of-indonesia.netlify.app/" />
+      <meta property="twitter:title" content="Regions of Indonesia" />
+      <meta property="twitter:description" content="Regions of Indonesia" />
+      <meta property="twitter:image" content="https://regions-of-indonesia.netlify.app/Cover.png" />
+
       {props.children}
     </NextHead>
   );
