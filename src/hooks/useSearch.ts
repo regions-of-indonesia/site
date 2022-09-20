@@ -7,7 +7,7 @@ async function fetcher(key: string, text: string) {
 }
 
 function useSearch(text: string) {
-  return useSWR(["search:", text], fetcher);
+  return useSWR(() => (text !== "" ? ["search:", text] : null), fetcher);
 }
 
 export default useSearch;

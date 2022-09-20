@@ -6,8 +6,8 @@ async function fetcher(_: string, districtCode: string) {
   return await client.subdistrict.findByDistrictCode(districtCode);
 }
 
-function useSubdistricts(districtCode: string | null) {
-  return useSWR(() => (districtCode !== null ? ["subdistricts", districtCode] : null), fetcher);
+function useSubdistricts(districtCode: string) {
+  return useSWR(() => (districtCode !== "" ? ["subdistricts", districtCode] : null), fetcher);
 }
 
 export default useSubdistricts;

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 
-import { Box, Container, Group, List, Notification, Select, Stack, Table, Text, TextInput, Title } from "@mantine/core";
+import { Box, Container, Grid, Group, List, Notification, Select, Stack, Table, Text, TextInput, Title } from "@mantine/core";
 import type { SelectItem } from "@mantine/core";
 
 import type { CodeName } from "@regions-of-indonesia/client";
@@ -44,12 +44,12 @@ function transposeSearch(search: { provinces: CodeName[]; districts: CodeName[];
 }
 
 function IndexPage() {
-  const [provinceCode, setProvinceCode] = useState<string | null>(null);
-  const [districtCode, setDistrictCode] = useState<string | null>(null);
-  const [subdistrictCode, setSubdistrictCode] = useState<string | null>(null);
-  const [villageCode, setVillageCode] = useState<string | null>(null);
+  const [provinceCode, setProvinceCode] = useState<string>("");
+  const [districtCode, setDistrictCode] = useState<string>("");
+  const [subdistrictCode, setSubdistrictCode] = useState<string>("");
+  const [villageCode, setVillageCode] = useState<string>("");
 
-  const [text, setText] = useState<string | null>(null);
+  const [text, setText] = useState<string>("");
 
   const { data: provinces } = useProvinces();
   const { data: districts } = useDistricts(provinceCode);
@@ -59,15 +59,15 @@ function IndexPage() {
   const { data: search } = useSearch(text);
 
   useEffect(() => {
-    setDistrictCode(null);
+    setDistrictCode("");
   }, [provinceCode]);
 
   useEffect(() => {
-    setSubdistrictCode(null);
+    setSubdistrictCode("");
   }, [districtCode]);
 
   useEffect(() => {
-    setVillageCode(null);
+    setVillageCode("");
   }, [subdistrictCode]);
 
   const provincesData = useMemo(() => (provinces ? codenameToData(provinces) : []), [JSON.stringify(provinces)]);
@@ -97,40 +97,48 @@ function IndexPage() {
         </Stack>
 
         <Stack spacing="xl">
-          <Group position="center" spacing="xl" p="xl">
-            <Select
-              sx={{ flexGrow: 1 }}
-              label="Province"
-              placeholder="Pick province..."
-              data={provincesData}
-              value={provinceCode}
-              onChange={setProvinceCode}
-            />
-            <Select
-              sx={{ flexGrow: 1 }}
-              label="District"
-              placeholder="Pick district..."
-              data={districtsData}
-              value={districtCode}
-              onChange={setDistrictCode}
-            />
-            <Select
-              sx={{ flexGrow: 1 }}
-              label="Subdistrict"
-              placeholder="Pick subdistrict..."
-              data={subdistrictsData}
-              value={subdistrictCode}
-              onChange={setSubdistrictCode}
-            />
-            <Select
-              sx={{ flexGrow: 1 }}
-              label="Village"
-              placeholder="Pick village..."
-              data={villagesData}
-              value={villageCode}
-              onChange={setVillageCode}
-            />
-          </Group>
+          <Grid p="xl" gutter="xl">
+            <Grid.Col span={12} md={6} xl={3}>
+              <Select
+                sx={{ flexGrow: 1 }}
+                label="Province"
+                placeholder="Pick province..."
+                data={provincesData}
+                value={provinceCode}
+                onChange={setProvinceCode}
+              />
+            </Grid.Col>
+            <Grid.Col span={12} md={6} xl={3}>
+              <Select
+                sx={{ flexGrow: 1 }}
+                label="District"
+                placeholder="Pick district..."
+                data={districtsData}
+                value={districtCode}
+                onChange={setDistrictCode}
+              />
+            </Grid.Col>
+            <Grid.Col span={12} md={6} xl={3}>
+              <Select
+                sx={{ flexGrow: 1 }}
+                label="Subdistrict"
+                placeholder="Pick subdistrict..."
+                data={subdistrictsData}
+                value={subdistrictCode}
+                onChange={setSubdistrictCode}
+              />
+            </Grid.Col>
+            <Grid.Col span={12} md={6} xl={3}>
+              <Select
+                sx={{ flexGrow: 1 }}
+                label="Village"
+                placeholder="Pick village..."
+                data={villagesData}
+                value={villageCode}
+                onChange={setVillageCode}
+              />
+            </Grid.Col>
+          </Grid>
 
           <Box p="xl">
             <Stack>
