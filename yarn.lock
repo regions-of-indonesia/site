@@ -396,10 +396,10 @@
   dependencies:
     "@babel/runtime" "^7.13.10"
 
-"@regions-of-indonesia/client@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@regions-of-indonesia/client/-/client-0.2.0.tgz#7a952e4d62fa948189154cc2ae62f5c4261ce3d8"
-  integrity sha512-a5pmw/rXFkRhxKtCzSPEKqgqO9JLuUdNAZzx8eA+9d4QIqKSJoYw0cpkCvn3Jzngl5hvQEEELXY7pfxeWAoS+Q==
+"@regions-of-indonesia/client@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@regions-of-indonesia/client/-/client-1.2.0.tgz#d1ab179f4bb7f0d3691ceb193aca4d505e6f8fee"
+  integrity sha512-84POdJTXOb+s+OeWdH+h8b4cjvtTWBy0PtNJB6vrMB9TtEq4nUeYaHpCNBUyXlrov/BnlVVyeKnQCPfgmLniOg==
 
 "@swc/helpers@0.4.11":
   version "0.4.11"
