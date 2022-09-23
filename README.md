@@ -1,5 +1,9 @@
 [![](./public/Cover.png)](https://regions-of-indonesia.netlify.app)
 
+<p align="center">
+  <a href="https://indonesia-api.netlify.app/regions-of-indonesia"><img src="https://raw.githubusercontent.com/indonesia-api/indonesia-api/main/public/Badge.svg?sanitize=true" /></a>
+</p>
+
 # Regions of Indonesia
 
 Regions of Indonesia
@@ -10,6 +14,16 @@ Regions of Indonesia
 - Search API for Dynamic API
 - [Javascript client SDK](https://github.com/regions-of-indonesia/client)
 - Documented with in-app [DEMO](https://regions-of-indonesia.netlify.app)
+
+## Roadmap
+
+- [x] Plain data
+- [x] Dynamic API & Static API
+- [x] Javascript Client SDK
+- [ ] Documentation
+- [ ] PHP Client SDK
+- [ ] Dart Client SDK
+- [ ] Python Client SDK
 
 ## Types
 
