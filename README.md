@@ -110,24 +110,24 @@ import { Provinces, Districts, Subdistricts, Villages } from "@regions-of-indone
 
 ## Dynamic Endpoints
 
-| Endpoint                                                                                                         | Return type  |
-| ---------------------------------------------------------------------------------------------------------------- | ------------ |
-| [/provinces](https://regions-of-indonesia-flamrdevs.koyeb.app/provinces)                                         | CodeName[]   |
-| [/province/11](https://regions-of-indonesia-flamrdevs.koyeb.app/province/11)                                     | CodeName     |
-| [/province/11/districts](https://regions-of-indonesia-flamrdevs.koyeb.app/province/11/districts)                 | CodeName[]   |
-| [/districts/11](https://regions-of-indonesia-flamrdevs.koyeb.app/districts/11)                                   | CodeName[]   |
-| [/district/11.01](https://regions-of-indonesia-flamrdevs.koyeb.app/district/11.01)                               | CodeName     |
-| [/district/11.01/subdistricts](https://regions-of-indonesia-flamrdevs.koyeb.app/district/11.01/subdistricts)     | CodeName[]   |
-| [/subdistricts/11.01](https://regions-of-indonesia-flamrdevs.koyeb.app/subdistricts/11.01)                       | CodeName[]   |
-| [/subdistrict/11.01.01](https://regions-of-indonesia-flamrdevs.koyeb.app/subdistrict/11.01.01)                   | CodeName     |
-| [/subdistrict/11.01.01/villages](https://regions-of-indonesia-flamrdevs.koyeb.app/subdistrict/11.01.01/villages) | CodeName[]   |
-| [/villages/11.01.01](https://regions-of-indonesia-flamrdevs.koyeb.app/villages/11.01.01)                         | CodeName[]   |
-| [/village/11.01.01.2001](https://regions-of-indonesia-flamrdevs.koyeb.app/village/11.01.01.2001)                 | CodeName     |
-| [/search?text=aceh](https://regions-of-indonesia-flamrdevs.koyeb.app/search?text=aceh)                           | SearchResult |
-| [/search/provinces?text=aceh](https://regions-of-indonesia-flamrdevs.koyeb.app/search/provinces?text=aceh)       | CodeName[]   |
-| [/search/districts?text=aceh](https://regions-of-indonesia-flamrdevs.koyeb.app/search/districts?text=aceh)       | CodeName[]   |
-| [/search/subdistricts?text=aceh](https://regions-of-indonesia-flamrdevs.koyeb.app/search/subdistricts?text=aceh) | CodeName[]   |
-| [/search/villages?text=aceh](https://regions-of-indonesia-flamrdevs.koyeb.app/search/villages?text=aceh)         | CodeName[]   |
+| Endpoint                                                                                              | Return type  |
+| ----------------------------------------------------------------------------------------------------- | ------------ |
+| [/provinces](https://regions-of-indonesia.deta.dev/provinces)                                         | CodeName[]   |
+| [/province/11](https://regions-of-indonesia.deta.dev/province/11)                                     | CodeName     |
+| [/province/11/districts](https://regions-of-indonesia.deta.dev/province/11/districts)                 | CodeName[]   |
+| [/districts/11](https://regions-of-indonesia.deta.dev/districts/11)                                   | CodeName[]   |
+| [/district/11.01](https://regions-of-indonesia.deta.dev/district/11.01)                               | CodeName     |
+| [/district/11.01/subdistricts](https://regions-of-indonesia.deta.dev/district/11.01/subdistricts)     | CodeName[]   |
+| [/subdistricts/11.01](https://regions-of-indonesia.deta.dev/subdistricts/11.01)                       | CodeName[]   |
+| [/subdistrict/11.01.01](https://regions-of-indonesia.deta.dev/subdistrict/11.01.01)                   | CodeName     |
+| [/subdistrict/11.01.01/villages](https://regions-of-indonesia.deta.dev/subdistrict/11.01.01/villages) | CodeName[]   |
+| [/villages/11.01.01](https://regions-of-indonesia.deta.dev/villages/11.01.01)                         | CodeName[]   |
+| [/village/11.01.01.2001](https://regions-of-indonesia.deta.dev/village/11.01.01.2001)                 | CodeName     |
+| [/search?text=aceh](https://regions-of-indonesia.deta.dev/search?text=aceh)                           | SearchResult |
+| [/search/provinces?text=aceh](https://regions-of-indonesia.deta.dev/search/provinces?text=aceh)       | CodeName[]   |
+| [/search/districts?text=aceh](https://regions-of-indonesia.deta.dev/search/districts?text=aceh)       | CodeName[]   |
+| [/search/subdistricts?text=aceh](https://regions-of-indonesia.deta.dev/search/subdistricts?text=aceh) | CodeName[]   |
+| [/search/villages?text=aceh](https://regions-of-indonesia.deta.dev/search/villages?text=aceh)         | CodeName[]   |
 
 ## Static Endpoints
 
