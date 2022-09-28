@@ -1,5 +1,4 @@
 import { RegionsOfIndonesiaClient, log, cache } from "@regions-of-indonesia/client";
-// import type { Middleware } from "@regions-of-indonesia/client";
 
 import { createInstance } from "localforage";
 
@@ -18,7 +17,7 @@ const driver = {
 };
 
 const client = new RegionsOfIndonesiaClient({
-  middlewares: [log(), cache(driver)],
+  middlewares: [log({ key: true }), cache({ driver })],
 });
 
 export { client };

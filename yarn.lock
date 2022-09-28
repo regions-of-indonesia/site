@@ -396,10 +396,19 @@
   dependencies:
     "@babel/runtime" "^7.13.10"
 
-"@regions-of-indonesia/client@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@regions-of-indonesia/client/-/client-1.2.0.tgz#d1ab179f4bb7f0d3691ceb193aca4d505e6f8fee"
-  integrity sha512-84POdJTXOb+s+OeWdH+h8b4cjvtTWBy0PtNJB6vrMB9TtEq4nUeYaHpCNBUyXlrov/BnlVVyeKnQCPfgmLniOg==
+"@regions-of-indonesia/client@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@regions-of-indonesia/client/-/client-2.0.0.tgz#03dedf43e5d2e3a0b52c8891c2593653c5a66b0e"
+  integrity sha512-Cn4bjqS0qz3xAt+epku9d/ETmAdi7dSqDz2+4XKU+GvpA2fCCQSUIj/Uthy6mi46QEL6diu1OTKI8d12nhJoqw==
+
+"@regions-of-indonesia/swr@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@regions-of-indonesia/swr/-/swr-1.0.0.tgz#9b881ade6afaeca89f454f840315ecc0a009a802"
+  integrity sha512-Wtsiu2GL8nqFpgJQBC5QtRYa21Hylm7dKU3S/x4YmBRsWtGS2Fjzq99vYAf/fhYzSGvzymdEyxhB/Ndoe+lEaQ==
+  dependencies:
+    "@regions-of-indonesia/client" "^2.0.0"
+    react "^18.2.0"
+    swr "^1.3.0"
 
 "@swc/helpers@0.4.11":
   version "0.4.11"

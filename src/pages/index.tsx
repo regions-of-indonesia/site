@@ -5,11 +5,7 @@ import type { SelectItem } from "@mantine/core";
 
 import type { CodeName } from "@regions-of-indonesia/client";
 
-import useProvinces from "~/hooks/useProvinces";
-import useDistricts from "~/hooks/useDistricts";
-import useSubdistricts from "~/hooks/useSubdistricts";
-import useVillages from "~/hooks/useVillages";
-import useSearch from "~/hooks/useSearch";
+import { useProvinces, useDistricts, useSubdistricts, useVillages, useSearch } from "~/hooks/regions-of-indonesia-swr";
 
 function codenameToData(codenames: CodeName[]): SelectItem[] {
   return codenames.map(({ code, name }) => {
