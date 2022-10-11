@@ -1,10 +1,27 @@
 import { useEffect, useMemo, useState } from "react";
 
-import { Box, Container, Grid, Group, List, Notification, Select, Stack, Table, Text, TextInput, Title } from "@mantine/core";
+import {
+  ActionIcon,
+  Box,
+  Button,
+  Container,
+  Grid,
+  Group,
+  Select,
+  Stack,
+  Table,
+  Text,
+  TextInput,
+  Title,
+  useMantineColorScheme,
+} from "@mantine/core";
 import type { SelectItem } from "@mantine/core";
+
+import { IconArrowRight, IconBrandGithub, IconMoon, IconSun } from "@tabler/icons";
 
 import type { CodeName } from "@regions-of-indonesia/client";
 
+import { APP } from "~/const/app";
 import { useProvinces, useDistricts, useSubdistricts, useVillages, useSearch } from "~/hooks/regions-of-indonesia-swr";
 
 function codenameToData(codenames: CodeName[]): SelectItem[] {
@@ -27,16 +44,26 @@ function transposeSearch(search: { provinces: CodeName[]; districts: CodeName[];
     const subdistrict = search.subdistricts[i];
     const village = search.villages[i];
 
-    array.push({
-      key: `${province?.code ?? "null"}-${district?.code ?? "null"}-${subdistrict?.code ?? "null"}-${village?.code ?? "null"}`,
-      province,
-      district,
-      subdistrict,
-      village,
-    });
+    const key = `${province?.code ?? "null"}-${district?.code ?? "null"}-${subdistrict?.code ?? "null"}-${village?.code ?? "null"}`;
+
+    array.push({ key, province, district, subdistrict, village });
   }
 
   return array;
+}
+
+function GithubLink() {
+  return (
+    <ActionIcon component="a" href={APP.link.github}>
+      <IconBrandGithub />
+    </ActionIcon>
+  );
+}
+
+function ColorSchemeToggler() {
+  const { colorScheme, toggleColorScheme } = useMantineColorScheme();
+
+  return <ActionIcon onClick={() => toggleColorScheme()}>{colorScheme === "dark" ? <IconSun /> : <IconMoon />}</ActionIcon>;
 }
 
 function IndexPage() {
@@ -74,104 +101,122 @@ function IndexPage() {
   const transposedSearch = useMemo(() => (search ? transposeSearch(search) : []), [JSON.stringify(search)]);
 
   return (
-    <Container size="xl">
-      <Stack spacing="xl">
-        <Title>Regions of Indonesia</Title>
+    <>
+      <Container size="xl">
+        <Group position="apart" py="xs">
+          <Title>Regions of Indonesia</Title>
 
-        <Notification title="Under Development" my="xl" color="yellow" disallowClose>
-          Documented Soon
-        </Notification>
+          <Group>
+            <Button component="a" href={APP.link.docs} rightIcon={<IconArrowRight />} variant="outline">
+              Docs
+            </Button>
 
-        <Stack spacing="xl">
-          <Text>Features</Text>
+            <GithubLink />
 
-          <List withPadding>
-            <List.Item>Dynamic API & Static API</List.Item>
-            <List.Item>Search API</List.Item>
-            <List.Item>Javascript Client SDK with automatic caching</List.Item>
-          </List>
-        </Stack>
+            <ColorSchemeToggler />
+          </Group>
+        </Group>
+      </Container>
 
-        <Stack spacing="xl">
-          <Grid p="xl" gutter="xl">
-            <Grid.Col span={12} md={6} xl={3}>
-              <Select
-                sx={{ flexGrow: 1 }}
-                label="Province"
-                placeholder="Pick province..."
-                data={provincesData}
-                value={provinceCode}
-                onChange={setProvinceCode}
-              />
-            </Grid.Col>
-            <Grid.Col span={12} md={6} xl={3}>
-              <Select
-                sx={{ flexGrow: 1 }}
-                label="District"
-                placeholder="Pick district..."
-                data={districtsData}
-                value={districtCode}
-                onChange={setDistrictCode}
-              />
-            </Grid.Col>
-            <Grid.Col span={12} md={6} xl={3}>
-              <Select
-                sx={{ flexGrow: 1 }}
-                label="Subdistrict"
-                placeholder="Pick subdistrict..."
-                data={subdistrictsData}
-                value={subdistrictCode}
-                onChange={setSubdistrictCode}
-              />
-            </Grid.Col>
-            <Grid.Col span={12} md={6} xl={3}>
-              <Select
-                sx={{ flexGrow: 1 }}
-                label="Village"
-                placeholder="Pick village..."
-                data={villagesData}
-                value={villageCode}
-                onChange={setVillageCode}
-              />
-            </Grid.Col>
-          </Grid>
+      <Container size="xl">
+        <Stack p="md" spacing="xl">
+          <Stack my="md">
+            <Text align="center" size="xl">
+              Basic
+            </Text>
 
-          <Box p="xl">
-            <Stack>
-              <TextInput
-                label="Search"
-                placeholder="Search..."
-                value={text}
-                onChange={(event) => {
-                  setText(event.target.value);
-                }}
-              />
+            <Box>
+              <Grid gutter="xl">
+                <Grid.Col span={12} md={6} xl={3}>
+                  <Select
+                    sx={{ flexGrow: 1 }}
+                    label="Province"
+                    placeholder="Pick province..."
+                    nothingFound="Nothing found"
+                    data={provincesData}
+                    value={provinceCode}
+                    onChange={setProvinceCode}
+                  />
+                </Grid.Col>
+                <Grid.Col span={12} md={6} xl={3}>
+                  <Select
+                    sx={{ flexGrow: 1 }}
+                    label="District"
+                    placeholder="Pick district..."
+                    nothingFound="Nothing found"
+                    data={districtsData}
+                    value={districtCode}
+                    onChange={setDistrictCode}
+                  />
+                </Grid.Col>
+                <Grid.Col span={12} md={6} xl={3}>
+                  <Select
+                    sx={{ flexGrow: 1 }}
+                    label="Subdistrict"
+                    placeholder="Pick subdistrict..."
+                    nothingFound="Nothing found"
+                    data={subdistrictsData}
+                    value={subdistrictCode}
+                    onChange={setSubdistrictCode}
+                  />
+                </Grid.Col>
+                <Grid.Col span={12} md={6} xl={3}>
+                  <Select
+                    sx={{ flexGrow: 1 }}
+                    label="Village"
+                    placeholder="Pick village..."
+                    nothingFound="Nothing found"
+                    data={villagesData}
+                    value={villageCode}
+                    onChange={setVillageCode}
+                  />
+                </Grid.Col>
+              </Grid>
+            </Box>
+          </Stack>
 
-              <Table>
-                <thead>
-                  <tr>
-                    <th>Provinces</th>
-                    <th>Districts</th>
-                    <th>Subdistricts</th>
-                    <th>Villages</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {transposedSearch.map(({ key, province, district, subdistrict, village }) => (
-                    <tr key={key}>
-                      <td>{province && province.name}</td>
-                      <td>{district && district.name}</td>
-                      <td>{subdistrict && subdistrict.name}</td>
-                      <td>{village && village.name}</td>
+          <Stack my="md">
+            <Text align="center" size="xl">
+              Search
+            </Text>
+
+            <Box>
+              <Stack>
+                <TextInput
+                  label="Search"
+                  placeholder="Search..."
+                  value={text}
+                  onChange={(event) => {
+                    setText(event.target.value);
+                  }}
+                />
+
+                <Table>
+                  <thead>
+                    <tr>
+                      <th>Provinces</th>
+                      <th>Districts</th>
+                      <th>Subdistricts</th>
+                      <th>Villages</th>
                     </tr>
-                  ))}
-                </tbody>
-              </Table>
-            </Stack>
-          </Box>
+                  </thead>
+                  <tbody>
+                    {transposedSearch.map(({ key, province, district, subdistrict, village }) => (
+                      <tr key={key}>
+                        <td>{province && province.name}</td>
+                        <td>{district && district.name}</td>
+                        <td>{subdistrict && subdistrict.name}</td>
+                        <td>{village && village.name}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
+              </Stack>
+            </Box>
+          </Stack>
         </Stack>
-      </Stack>
-    </Container>
+      </Container>
+    </>
   );
 }
 

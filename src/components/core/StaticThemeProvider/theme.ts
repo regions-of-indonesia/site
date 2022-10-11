@@ -1,7 +1,7 @@
 import { DEFAULT_THEME } from "@mantine/core";
 import type { MantineColor, MantineSizes, MantineThemeOverride } from "@mantine/core";
 
-const primaryColor: MantineColor = "red";
+const primaryColor: MantineColor = "indigo";
 
 const breakpoints: MantineSizes = {
   xs: 640,
@@ -11,8 +11,7 @@ const breakpoints: MantineSizes = {
   xl: 1536,
 };
 
-const THEME: MantineThemeOverride = {
-  colorScheme: "light",
+const shared: MantineThemeOverride = {
   defaultRadius: "md",
   cursorType: "pointer",
   breakpoints,
@@ -41,4 +40,19 @@ const THEME: MantineThemeOverride = {
   },
 };
 
-export default THEME;
+const light: MantineThemeOverride = {
+  ...shared,
+  colorScheme: "light",
+};
+
+const dark: MantineThemeOverride = {
+  ...shared,
+  colorScheme: "dark",
+};
+
+const theme = {
+  light,
+  dark,
+};
+
+export default theme;

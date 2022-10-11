@@ -396,17 +396,24 @@
   dependencies:
     "@babel/runtime" "^7.13.10"
 
-"@regions-of-indonesia/client@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@regions-of-indonesia/client/-/client-2.0.0.tgz#03dedf43e5d2e3a0b52c8891c2593653c5a66b0e"
-  integrity sha512-Cn4bjqS0qz3xAt+epku9d/ETmAdi7dSqDz2+4XKU+GvpA2fCCQSUIj/Uthy6mi46QEL6diu1OTKI8d12nhJoqw==
+"@regions-of-indonesia/client@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@regions-of-indonesia/client/-/client-2.1.0.tgz#7a69901607877f45e43e5c883d3824841d7f799c"
+  integrity sha512-ric/+EJ7ghAwvv8bT+/WVuintsolWYo7N8PeCXER7nGmqd9CIpQ0PPrx4yHoDo6WueAWwTNNdytgjq0AfWRD0g==
 
-"@regions-of-indonesia/swr@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@regions-of-indonesia/swr/-/swr-1.0.0.tgz#9b881ade6afaeca89f454f840315ecc0a009a802"
-  integrity sha512-Wtsiu2GL8nqFpgJQBC5QtRYa21Hylm7dKU3S/x4YmBRsWtGS2Fjzq99vYAf/fhYzSGvzymdEyxhB/Ndoe+lEaQ==
+"@regions-of-indonesia/localforage@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@regions-of-indonesia/localforage/-/localforage-0.2.0.tgz#f54f311fa21e9d13f575053203fe83da7f59e0ce"
+  integrity sha512-6N8+Tq2AdIRhBqG4V5OYvOxH6fXeuq74sE7DzOwhGW2kNHJhE59qo1MlG8WI+y9W+JnjRl37wSNBo3N/nKEwow==
   dependencies:
-    "@regions-of-indonesia/client" "^2.0.0"
+    localforage "^1.10.0"
+
+"@regions-of-indonesia/swr@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@regions-of-indonesia/swr/-/swr-1.2.0.tgz#dc58526ce6d13d896fa17cff269263beff91bb00"
+  integrity sha512-8p4C/CB7JfVSehVgDKYqfgQLVT8irw/6CVq4PP8w8fgs3anyVnbs0XuJF8iKBush2haH35lAJ5iEM4iKgE+KZw==
+  dependencies:
+    "@regions-of-indonesia/client" "^2.1.0"
     react "^18.2.0"
     swr "^1.3.0"
 
@@ -416,6 +423,11 @@
   integrity sha512-rEUrBSGIoSFuYxwBYtlUFMlE2CwGhmW+w9355/5oduSw8e5h2+Tj4UrAGNNgP9915++wj5vkQo0UuOBqOAq4nw==
   dependencies:
     tslib "^2.4.0"
+
+"@tabler/icons@^1.102.0":
+  version "1.102.0"
+  resolved "https://registry.yarnpkg.com/@tabler/icons/-/icons-1.102.0.tgz#d0a2a92a62feca757c04d2407d006c32f886d928"
+  integrity sha512-8cfPL5Mg1HPNdMV6il3GoboC5dvq9x39DR5CwRmhcjyHuX+Hil3t4KUVDh70sxgc4/9C+xFnIRf1mKLLZPGyow==
 
 "@types/node@18.7.18":
   version "18.7.18"
@@ -719,6 +731,11 @@ isarray@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/isarray/-/isarray-1.0.0.tgz#bb935d48582cba168c06834957a54a3e07124f11"
   integrity sha512-VLghIWNM6ELQzo7zwmcg0NmTVyWKYjvIeM83yjp0wRDTmUnrM678fQbcKBo6n2CJEF0szoG//ytg+TKla89ALQ==
+
+javascript-yesterday@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/javascript-yesterday/-/javascript-yesterday-1.2.0.tgz#c3dfb86e640c0ea8982d7b8d14a2c9c5d27a9892"
+  integrity sha512-zNn4yxqhyoBPj4PenLo1a5Tgrcb6zyKpVsCJ5cpB74+Lc/N97luNAXfehgBGax9whSgZX77QJfvB6QvfMgSoYA==
 
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"

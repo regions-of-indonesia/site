@@ -1,8 +1,11 @@
-function getTitle(prefix?: string, suffix?: string) {
-  let title = "Regions of Indonesia";
-  if (typeof prefix === "string") title = `${prefix} | ${title}`;
-  if (typeof suffix === "string") title = `${title} | ${suffix}`;
-  return title.trim();
-}
+const APP = {
+  name: "Regions of Indonesia",
+  description: "Regions of Indonesia API",
+  link: {
+    self: "https://regions-of-indonesia.netlify.app",
+    docs: "https://docs-regions-of-indonesia.netlify.app",
+    github: "https://github.com/regions-of-indonesia",
+  },
+};
 
-export { getTitle };
+export { APP };
