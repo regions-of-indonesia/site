@@ -10,7 +10,6 @@ const AppHead = memo(() => {
   return (
     <Head>
       <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
       <meta property="og:type" content="website" />

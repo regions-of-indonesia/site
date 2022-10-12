@@ -9,7 +9,7 @@ import theme from "./theme";
 type StaticThemeProviderProps = PropsWithChildren<{}>;
 
 function StaticThemeProvider(props: StaticThemeProviderProps) {
-  const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({ key: "regions-of-indonesia-color-scheme", defaultValue: "dark" });
+  const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({ key: "regions-of-indonesia-color-scheme", defaultValue: "light" });
 
   const toggleColorScheme = () => {
     setColorScheme((value) => (value === "dark" ? "light" : "dark"));
