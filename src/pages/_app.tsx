@@ -4,7 +4,7 @@ import type { AppPropsWithLayout } from "next/app";
 
 import { APP } from "~/const/app";
 
-import { Head, StaticThemeProvider } from "~/components/core";
+import { Head, ThemeProvider } from "~/components/core";
 
 const AppHead = memo(() => {
   return (
@@ -36,7 +36,7 @@ const _App = ({ Component, pageProps }: _AppProps) => {
     <>
       <AppHead />
 
-      <StaticThemeProvider>{getLayout(<Component {...pageProps} />)}</StaticThemeProvider>
+      <ThemeProvider>{getLayout(<Component {...pageProps} />)}</ThemeProvider>
     </>
   );
 };

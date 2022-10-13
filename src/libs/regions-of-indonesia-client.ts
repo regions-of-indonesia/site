@@ -5,11 +5,7 @@ import { createLocalForageDriver } from "@regions-of-indonesia/localforage";
 const driver = createLocalForageDriver();
 
 const client = new RegionsOfIndonesiaClient({
-  middlewares: [
-    //
-    log({ key: true }),
-    cache({ driver }),
-  ],
+  middlewares: [log({ key: true }), cache({ driver })],
 });
 
 export { client };

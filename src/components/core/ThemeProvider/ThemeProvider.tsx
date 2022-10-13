@@ -6,9 +6,9 @@ import { useLocalStorage } from "@mantine/hooks";
 
 import theme from "./theme";
 
-type StaticThemeProviderProps = PropsWithChildren<{}>;
+type ThemeProviderProps = PropsWithChildren<{}>;
 
-function StaticThemeProvider(props: StaticThemeProviderProps) {
+function ThemeProvider(props: ThemeProviderProps) {
   const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({ key: "regions-of-indonesia-color-scheme", defaultValue: "light" });
 
   const toggleColorScheme = () => {
@@ -24,5 +24,5 @@ function StaticThemeProvider(props: StaticThemeProviderProps) {
   );
 }
 
-export type { StaticThemeProviderProps };
-export default StaticThemeProvider;
+export type { ThemeProviderProps };
+export default ThemeProvider;

@@ -1,21 +1,23 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 import {
   ActionIcon,
+  Anchor,
   Box,
   Button,
   Container,
   Grid,
   Group,
+  ScrollArea,
   Select,
   Stack,
   Table,
   Text,
   TextInput,
-  Title,
   useMantineColorScheme,
 } from "@mantine/core";
-import type { SelectItem } from "@mantine/core";
+import type { MantineColor, SelectItem } from "@mantine/core";
+import { Prism } from "@mantine/prism";
 
 import { IconArrowRight, IconBrandGithub, IconMoon, IconSun } from "@tabler/icons";
 
@@ -54,7 +56,7 @@ function transposeSearch(search: { provinces: CodeName[]; districts: CodeName[];
 
 function GithubLink() {
   return (
-    <ActionIcon component="a" href={APP.link.github}>
+    <ActionIcon component="a" href={APP.link.github} title="Github">
       <IconBrandGithub />
     </ActionIcon>
   );
@@ -63,7 +65,11 @@ function GithubLink() {
 function ColorSchemeToggler() {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
 
-  return <ActionIcon onClick={() => toggleColorScheme()}>{colorScheme === "dark" ? <IconSun /> : <IconMoon />}</ActionIcon>;
+  return (
+    <ActionIcon onClick={() => toggleColorScheme()} aria-label="Toggle color scheme">
+      {colorScheme === "dark" ? <IconSun /> : <IconMoon />}
+    </ActionIcon>
+  );
 }
 
 function IndexPage() {
@@ -100,11 +106,71 @@ function IndexPage() {
 
   const transposedSearch = useMemo(() => (search ? transposeSearch(search) : []), [JSON.stringify(search)]);
 
+  const prismStringify = useCallback((value: any) => JSON.stringify(value, null, 2), []);
+  const getHighlightLines = useCallback((codenames: CodeName[], selectedCode: string) => {
+    type Result = Record<
+      string,
+      {
+        color: MantineColor;
+        label?: string;
+      }
+    >;
+
+    if (codenames.length === 0 || !selectedCode) {
+      return {} as Result;
+    }
+
+    const index = codenames.findIndex(({ code }) => code === selectedCode);
+
+    if (index < 0) {
+      return {} as Result;
+    }
+
+    const value = 1 + (1 + index * 4);
+
+    const lines = Array(4)
+      .fill(null)
+      .map((_, i) => i + value);
+
+    const property: Result[string] = {
+      color: "primary",
+      label: "|",
+    };
+
+    return lines.reduce(
+      (obj, line) => {
+        obj[line] = property;
+        return obj;
+      },
+      {
+        [`${value}`]: {
+          color: "green",
+        },
+      } as Result
+    );
+  }, []);
+
+  const getPrismProperties = useCallback((codenames: CodeName[], selectedCode: string) => {
+    const arrays = codenames ?? [];
+
+    return { children: prismStringify(arrays), highlightLines: getHighlightLines(arrays, selectedCode) };
+  }, []);
+
+  const prismProvinces = useMemo(() => getPrismProperties(provinces, provinceCode), [JSON.stringify(provinces), provinceCode]);
+  const prismDistricts = useMemo(() => getPrismProperties(districts, districtCode), [JSON.stringify(districts), districtCode]);
+  const prismSubdistricts = useMemo(
+    () => getPrismProperties(subdistricts, subdistrictCode),
+    [JSON.stringify(subdistricts), subdistrictCode]
+  );
+  const prismVillages = useMemo(() => getPrismProperties(villages, villageCode), [JSON.stringify(villages), villageCode]);
+
   return (
     <>
       <Container size="xl">
         <Group position="apart" py="xs">
-          <Title>Regions of Indonesia</Title>
+          <Anchor href="/" size="xl" variant="text" weight={700}>
+            Regions of Indonesia
+          </Anchor>
 
           <Group>
             <Button component="a" href={APP.link.docs} rightIcon={<IconArrowRight />} variant="outline">
@@ -137,6 +203,12 @@ function IndexPage() {
                     value={provinceCode}
                     onChange={setProvinceCode}
                   />
+
+                  <ScrollArea mt="md" sx={{ height: 400 }}>
+                    <Prism language="json" noCopy withLineNumbers highlightLines={prismProvinces.highlightLines}>
+                      {prismProvinces.children}
+                    </Prism>
+                  </ScrollArea>
                 </Grid.Col>
                 <Grid.Col span={12} md={6} xl={3}>
                   <Select
@@ -148,6 +220,12 @@ function IndexPage() {
                     value={districtCode}
                     onChange={setDistrictCode}
                   />
+
+                  <ScrollArea mt="md" sx={{ height: 400 }}>
+                    <Prism language="json" noCopy withLineNumbers highlightLines={prismDistricts.highlightLines}>
+                      {prismDistricts.children}
+                    </Prism>
+                  </ScrollArea>
                 </Grid.Col>
                 <Grid.Col span={12} md={6} xl={3}>
                   <Select
@@ -159,6 +237,12 @@ function IndexPage() {
                     value={subdistrictCode}
                     onChange={setSubdistrictCode}
                   />
+
+                  <ScrollArea mt="md" sx={{ height: 400 }}>
+                    <Prism language="json" noCopy withLineNumbers highlightLines={prismSubdistricts.highlightLines}>
+                      {prismSubdistricts.children}
+                    </Prism>
+                  </ScrollArea>
                 </Grid.Col>
                 <Grid.Col span={12} md={6} xl={3}>
                   <Select
@@ -170,6 +254,12 @@ function IndexPage() {
                     value={villageCode}
                     onChange={setVillageCode}
                   />
+
+                  <ScrollArea mt="md" sx={{ height: 400 }}>
+                    <Prism language="json" noCopy withLineNumbers highlightLines={prismVillages.highlightLines}>
+                      {prismVillages.children}
+                    </Prism>
+                  </ScrollArea>
                 </Grid.Col>
               </Grid>
             </Box>
