@@ -1,10 +1,13 @@
 import { memo } from "react";
 
+import type { GetLayout } from "next";
 import type { AppPropsWithLayout } from "next/app";
 
 import { APP } from "~/const/app";
 
 import { Head, ThemeProvider } from "~/components/core";
+
+import "~/styles/globals.css";
 
 const AppHead = memo(() => {
   return (
@@ -29,8 +32,9 @@ const AppHead = memo(() => {
 
 type _AppProps = AppPropsWithLayout;
 
+const defaultGetLayout: GetLayout = (page) => <>{page}</>;
 const _App = ({ Component, pageProps }: _AppProps) => {
-  const getLayout = Component.getLayout ?? ((page) => <>{page}</>);
+  const getLayout = Component.getLayout ?? defaultGetLayout;
 
   return (
     <>

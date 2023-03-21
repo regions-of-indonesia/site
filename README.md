@@ -4,6 +4,8 @@
   <a href="https://indonesia-api.netlify.app/regions-of-indonesia"><img src="https://raw.githubusercontent.com/indonesia-api/indonesia-api/main/public/Badge.svg?sanitize=true" /></a>
 </p>
 
+<img src="https://hiiits.deno.dev/hit/regions-of-indonesia/site?" width="100%" heigth="10px" />
+
 # Regions of Indonesia
 
 Regions of Indonesia [site][site]
@@ -12,7 +14,7 @@ Regions of Indonesia [site][site]
 
 - Support both [Dynamic API][github:api] & [Static API][github:static-api]
 - Search API for Dynamic API
-- [Javascript client SDK][github:client]
+- [Javascript client][github:client]
 - [Documented][docs] with in-app [demo][site]
 
 ## Packages
@@ -22,16 +24,18 @@ Regions of Indonesia [site][site]
 - [@regions-of-indonesia/swr][github:swr]
 - [@regions-of-indonesia/react-query][github:react-query]
 - [@regions-of-indonesia/solid-query][github:solid-query]
+- [@regions-of-indonesia/vue-query][github:vue-query]
+- [@regions-of-indonesia/svelte-query][github:svelte-query]
 
 ## Roadmap
 
 - [x] Plain data
 - [x] Dynamic API & Static API
-- [x] Javascript client SDK
+- [x] Javascript client
 - [ ] Documentation
-- [ ] PHP client SDK
-- [ ] Dart client SDK
-- [ ] Python client SDK
+- [ ] PHP client
+- [ ] Dart client
+- [ ] Python client
 
 ## Types
 
@@ -57,6 +61,8 @@ Install
 npm install @regions-of-indonesia/client
 # or
 yarn add @regions-of-indonesia/client
+# or
+pnpm add @regions-of-indonesia/client
 ```
 
 Usage
@@ -67,7 +73,7 @@ Usage
 import { RegionsOfIndonesia } from "@regions-of-indonesia/client";
 
 const client = new RegionsOfIndonesia({
-  baseURL: string, // [OPTIONAL] default is "https://regions-of-indonesia.deta.dev" or "https://regions-of-indonesia.github.io/static-api" if static is true
+  baseURL: string, // [OPTIONAL] default is "https://regions-of-indonesia.deno.dev" or "https://regions-of-indonesia.github.io/static-api" if static is true
   middlewares: Middleware[] // [OPTIONAL] default is log() and cache()
   static: boolean, // [OPTIONAL] default is false
 });
@@ -93,41 +99,41 @@ Install
 npm install @regions-of-indonesia/data
 # or
 yarn add @regions-of-indonesia/data
+# or
+pnpm add @regions-of-indonesia/data
 ```
 
 Usage
 
 ```typescript
-import { Provinces, Districts, Subdistricts, Villages } from "@regions-of-indonesia/data";
+import { PROVINCE, DISTRICT, SUBDISTRICT, VILLAGE } from "@regions-of-indonesia/data";
 
-// Provinces is {[key: string]: string}
-// Districts is {[key: string]: string}
-// Subdistricts is {[key: string]: string}
-// Villages is {[key: string]: string}
-
-// type {[key: string]: string} means key is region code, value is region name
+// PROVINCE is {[key: string]: string}
+// DISTRICT is {[key: string]: string}
+// SUBDISTRICT is {[key: string]: string}
+// VILLAGE is {[key: string]: string}
 ```
 
 ## Dynamic Endpoints
 
 | Endpoint                                                                                              | Return type  |
 | ----------------------------------------------------------------------------------------------------- | ------------ |
-| [/provinces](https://regions-of-indonesia.deta.dev/provinces)                                         | CodeName[]   |
-| [/province/11](https://regions-of-indonesia.deta.dev/province/11)                                     | CodeName     |
-| [/province/11/districts](https://regions-of-indonesia.deta.dev/province/11/districts)                 | CodeName[]   |
-| [/districts/11](https://regions-of-indonesia.deta.dev/districts/11)                                   | CodeName[]   |
-| [/district/11.01](https://regions-of-indonesia.deta.dev/district/11.01)                               | CodeName     |
-| [/district/11.01/subdistricts](https://regions-of-indonesia.deta.dev/district/11.01/subdistricts)     | CodeName[]   |
-| [/subdistricts/11.01](https://regions-of-indonesia.deta.dev/subdistricts/11.01)                       | CodeName[]   |
-| [/subdistrict/11.01.01](https://regions-of-indonesia.deta.dev/subdistrict/11.01.01)                   | CodeName     |
-| [/subdistrict/11.01.01/villages](https://regions-of-indonesia.deta.dev/subdistrict/11.01.01/villages) | CodeName[]   |
-| [/villages/11.01.01](https://regions-of-indonesia.deta.dev/villages/11.01.01)                         | CodeName[]   |
-| [/village/11.01.01.2001](https://regions-of-indonesia.deta.dev/village/11.01.01.2001)                 | CodeName     |
-| [/search?text=aceh](https://regions-of-indonesia.deta.dev/search?text=aceh)                           | SearchResult |
-| [/search/provinces?text=aceh](https://regions-of-indonesia.deta.dev/search/provinces?text=aceh)       | CodeName[]   |
-| [/search/districts?text=aceh](https://regions-of-indonesia.deta.dev/search/districts?text=aceh)       | CodeName[]   |
-| [/search/subdistricts?text=aceh](https://regions-of-indonesia.deta.dev/search/subdistricts?text=aceh) | CodeName[]   |
-| [/search/villages?text=aceh](https://regions-of-indonesia.deta.dev/search/villages?text=aceh)         | CodeName[]   |
+| [/provinces](https://regions-of-indonesia.deno.dev/provinces)                                         | CodeName[]   |
+| [/province/11](https://regions-of-indonesia.deno.dev/province/11)                                     | CodeName     |
+| [/province/11/districts](https://regions-of-indonesia.deno.dev/province/11/districts)                 | CodeName[]   |
+| [/districts/11](https://regions-of-indonesia.deno.dev/districts/11)                                   | CodeName[]   |
+| [/district/11.01](https://regions-of-indonesia.deno.dev/district/11.01)                               | CodeName     |
+| [/district/11.01/subdistricts](https://regions-of-indonesia.deno.dev/district/11.01/subdistricts)     | CodeName[]   |
+| [/subdistricts/11.01](https://regions-of-indonesia.deno.dev/subdistricts/11.01)                       | CodeName[]   |
+| [/subdistrict/11.01.01](https://regions-of-indonesia.deno.dev/subdistrict/11.01.01)                   | CodeName     |
+| [/subdistrict/11.01.01/villages](https://regions-of-indonesia.deno.dev/subdistrict/11.01.01/villages) | CodeName[]   |
+| [/villages/11.01.01](https://regions-of-indonesia.deno.dev/villages/11.01.01)                         | CodeName[]   |
+| [/village/11.01.01.2001](https://regions-of-indonesia.deno.dev/village/11.01.01.2001)                 | CodeName     |
+| [/search?name=aceh](https://regions-of-indonesia.deno.dev/search?name=aceh)                           | SearchResult |
+| [/search/provinces?name=aceh](https://regions-of-indonesia.deno.dev/search/provinces?name=aceh)       | CodeName[]   |
+| [/search/districts?name=aceh](https://regions-of-indonesia.deno.dev/search/districts?name=aceh)       | CodeName[]   |
+| [/search/subdistricts?name=aceh](https://regions-of-indonesia.deno.dev/search/subdistricts?name=aceh) | CodeName[]   |
+| [/search/villages?name=aceh](https://regions-of-indonesia.deno.dev/search/villages?name=aceh)         | CodeName[]   |
 
 ## Static Endpoints
 
@@ -182,6 +188,8 @@ GPL-3.0
 [github:swr]: https://github.com/regions-of-indonesia/swr
 [github:react-query]: https://github.com/regions-of-indonesia/react-query
 [github:solid-query]: https://github.com/regions-of-indonesia/solid-query
+[github:vue-query]: https://github.com/regions-of-indonesia/vue-query
+[github:svelte-query]: https://github.com/regions-of-indonesia/svelte-query
 [github:example-react-ts]: https://github.com/regions-of-indonesia/example-react-ts
 [github:example-react-ts-swr]: https://github.com/regions-of-indonesia/example-react-ts-swr
 [github:example-react-ts-query]: https://github.com/regions-of-indonesia/example-react-ts-query

@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   ActionIcon,
   Anchor,
+  Badge,
   Box,
   Button,
   Container,
@@ -14,12 +15,13 @@ import {
   Table,
   Text,
   TextInput,
+  Tooltip,
   useMantineColorScheme,
 } from "@mantine/core";
 import type { MantineColor, SelectItem } from "@mantine/core";
 import { Prism } from "@mantine/prism";
 
-import { IconArrowRight, IconBrandGithub, IconMoon, IconSun } from "@tabler/icons";
+import { IconArrowRight, IconBrandGithub, IconMoon, IconSun } from "@tabler/icons-react";
 
 import type { CodeName } from "@regions-of-indonesia/client";
 
@@ -28,25 +30,20 @@ import { useProvinces, useDistricts, useSubdistricts, useVillages, useSearch } f
 
 function codenameToData(codenames: CodeName[]): SelectItem[] {
   return codenames.map(({ code, name }) => {
-    return {
-      value: code,
-      label: name,
-    };
+    return { value: code, label: name };
   });
 }
 
 function transposeSearch(search: { provinces: CodeName[]; districts: CodeName[]; subdistricts: CodeName[]; villages: CodeName[] }) {
-  const length = Math.max(search.provinces.length, search.districts.length, search.subdistricts.length, search.villages.length);
-
-  const array: { key: string; province?: CodeName; district?: CodeName; subdistrict?: CodeName; village?: CodeName }[] = [];
+  const length = Math.max(search.provinces.length, search.districts.length, search.subdistricts.length, search.villages.length),
+    array: { key: string; province?: CodeName; district?: CodeName; subdistrict?: CodeName; village?: CodeName }[] = [];
 
   for (let i = 0; i < length; i++) {
-    const province = search.provinces[i];
-    const district = search.districts[i];
-    const subdistrict = search.subdistricts[i];
-    const village = search.villages[i];
-
-    const key = `${province?.code ?? "null"}-${district?.code ?? "null"}-${subdistrict?.code ?? "null"}-${village?.code ?? "null"}`;
+    const province = search.provinces[i],
+      district = search.districts[i],
+      subdistrict = search.subdistricts[i],
+      village = search.villages[i],
+      key = `${province?.code ?? "null"}-${district?.code ?? "null"}-${subdistrict?.code ?? "null"}-${village?.code ?? "null"}`;
 
     array.push({ key, province, district, subdistrict, village });
   }
@@ -56,9 +53,11 @@ function transposeSearch(search: { provinces: CodeName[]; districts: CodeName[];
 
 function GithubLink() {
   return (
-    <ActionIcon component="a" href={APP.link.github} title="Github">
-      <IconBrandGithub />
-    </ActionIcon>
+    <Tooltip label="Github" withinPortal>
+      <ActionIcon component="a" href={APP.link.github} aria-label="Github">
+        <IconBrandGithub />
+      </ActionIcon>
+    </Tooltip>
   );
 }
 
@@ -66,26 +65,28 @@ function ColorSchemeToggler() {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
 
   return (
-    <ActionIcon onClick={() => toggleColorScheme()} aria-label="Toggle color scheme">
-      {colorScheme === "dark" ? <IconSun /> : <IconMoon />}
-    </ActionIcon>
+    <Tooltip label="Color scheme" withinPortal>
+      <ActionIcon onClick={() => toggleColorScheme()} aria-label="Color scheme">
+        {colorScheme === "dark" ? <IconSun /> : <IconMoon />}
+      </ActionIcon>
+    </Tooltip>
   );
 }
 
 function IndexPage() {
-  const [provinceCode, setProvinceCode] = useState<string>("");
-  const [districtCode, setDistrictCode] = useState<string>("");
-  const [subdistrictCode, setSubdistrictCode] = useState<string>("");
-  const [villageCode, setVillageCode] = useState<string>("");
+  const [provinceCode, setProvinceCode] = useState<string>(""),
+    [districtCode, setDistrictCode] = useState<string>(""),
+    [subdistrictCode, setSubdistrictCode] = useState<string>(""),
+    [villageCode, setVillageCode] = useState<string>("");
 
-  const [text, setText] = useState<string>("");
+  const [name, setName] = useState<string>("");
 
-  const { data: provinces } = useProvinces();
-  const { data: districts } = useDistricts(provinceCode);
-  const { data: subdistricts } = useSubdistricts(districtCode);
-  const { data: villages } = useVillages(subdistrictCode);
+  const { data: provinces } = useProvinces(),
+    { data: districts } = useDistricts(provinceCode),
+    { data: subdistricts } = useSubdistricts(districtCode),
+    { data: villages } = useVillages(subdistrictCode);
 
-  const { data: search } = useSearch(text);
+  const { data: search } = useSearch(name);
 
   useEffect(() => {
     setDistrictCode("");
@@ -99,83 +100,69 @@ function IndexPage() {
     setVillageCode("");
   }, [subdistrictCode]);
 
-  const provincesData = useMemo(() => (provinces ? codenameToData(provinces) : []), [JSON.stringify(provinces)]);
-  const districtsData = useMemo(() => (districts ? codenameToData(districts) : []), [JSON.stringify(districts)]);
-  const subdistrictsData = useMemo(() => (subdistricts ? codenameToData(subdistricts) : []), [JSON.stringify(subdistricts)]);
-  const villagesData = useMemo(() => (villages ? codenameToData(villages) : []), [JSON.stringify(villages)]);
+  const provincesData = useMemo(() => (provinces ? codenameToData(provinces) : []), [JSON.stringify(provinces)]),
+    districtsData = useMemo(() => (districts ? codenameToData(districts) : []), [JSON.stringify(districts)]),
+    subdistrictsData = useMemo(() => (subdistricts ? codenameToData(subdistricts) : []), [JSON.stringify(subdistricts)]),
+    villagesData = useMemo(() => (villages ? codenameToData(villages) : []), [JSON.stringify(villages)]);
 
   const transposedSearch = useMemo(() => (search ? transposeSearch(search) : []), [JSON.stringify(search)]);
 
-  const prismStringify = useCallback((value: any) => JSON.stringify(value, null, 2), []);
-  const getHighlightLines = useCallback((codenames: CodeName[], selectedCode: string) => {
-    type Result = Record<
-      string,
-      {
-        color: MantineColor;
-        label?: string;
-      }
-    >;
+  const prismStringify = useCallback((value: any) => JSON.stringify(value, null, 2), []),
+    getHighlightLines = useCallback((codenames: CodeName[], selectedCode: string) => {
+      type Result = Record<string, { color: MantineColor; label?: string }>;
 
-    if (codenames.length === 0 || !selectedCode) {
-      return {} as Result;
-    }
+      if (codenames.length === 0 || !selectedCode) return {} as Result;
 
-    const index = codenames.findIndex(({ code }) => code === selectedCode);
+      const index = codenames.findIndex(({ code }) => code === selectedCode);
 
-    if (index < 0) {
-      return {} as Result;
-    }
+      if (index < 0) return {} as Result;
 
-    const value = 1 + (1 + index * 4);
+      const value = 1 + (1 + index * 4);
 
-    const lines = Array(4)
-      .fill(null)
-      .map((_, i) => i + value);
+      const lines = Array(4)
+        .fill(null)
+        .map((_, i) => i + value);
 
-    const property: Result[string] = {
-      color: "primary",
-      label: "|",
-    };
+      const property: Result[string] = { color: "primary", label: "|" };
 
-    return lines.reduce(
-      (obj, line) => {
-        obj[line] = property;
-        return obj;
-      },
-      {
-        [`${value}`]: {
-          color: "green",
+      return lines.reduce(
+        (obj, line) => {
+          obj[line] = property;
+          return obj;
         },
-      } as Result
-    );
-  }, []);
+        { [`${value}`]: { color: "green" } } as Result
+      );
+    }, []);
 
   const getPrismProperties = useCallback((codenames: CodeName[], selectedCode: string) => {
-    const arrays = codenames ?? [];
-
-    return { children: prismStringify(arrays), highlightLines: getHighlightLines(arrays, selectedCode) };
-  }, []);
-
-  const prismProvinces = useMemo(() => getPrismProperties(provinces, provinceCode), [JSON.stringify(provinces), provinceCode]);
-  const prismDistricts = useMemo(() => getPrismProperties(districts, districtCode), [JSON.stringify(districts), districtCode]);
-  const prismSubdistricts = useMemo(
-    () => getPrismProperties(subdistricts, subdistrictCode),
-    [JSON.stringify(subdistricts), subdistrictCode]
-  );
-  const prismVillages = useMemo(() => getPrismProperties(villages, villageCode), [JSON.stringify(villages), villageCode]);
+      return { children: prismStringify(codenames), highlightLines: getHighlightLines(codenames, selectedCode) };
+    }, []),
+    prismProvinces = useMemo(() => getPrismProperties(provinces || [], provinceCode), [JSON.stringify(provinces), provinceCode]),
+    prismDistricts = useMemo(() => getPrismProperties(districts || [], districtCode), [JSON.stringify(districts), districtCode]),
+    prismSubdistricts = useMemo(
+      () => getPrismProperties(subdistricts || [], subdistrictCode),
+      [JSON.stringify(subdistricts), subdistrictCode]
+    ),
+    prismVillages = useMemo(() => getPrismProperties(villages || [], villageCode), [JSON.stringify(villages), villageCode]);
 
   return (
     <>
       <Container size="xl">
         <Group position="apart" py="xs">
-          <Anchor href="/" size="xl" variant="text" weight={700}>
-            Regions of Indonesia
-          </Anchor>
+          <Group>
+            <Anchor href="/" size="xl" variant="text" weight={700}>
+              Regions of Indonesia
+            </Anchor>
+
+            <Badge variant="outline">Beta</Badge>
+          </Group>
 
           <Group>
-            <Button component="a" href={APP.link.docs} rightIcon={<IconArrowRight />} variant="outline">
-              Docs
-            </Button>
+            <Tooltip label="Documentation" withinPortal>
+              <Button component="a" href={APP.link.docs} rightIcon={<IconArrowRight />} variant="outline">
+                Docs
+              </Button>
+            </Tooltip>
 
             <GithubLink />
 
@@ -201,7 +188,9 @@ function IndexPage() {
                     nothingFound="Nothing found"
                     data={provincesData}
                     value={provinceCode}
-                    onChange={setProvinceCode}
+                    onChange={(value) => {
+                      if (value != null) setProvinceCode(value);
+                    }}
                   />
 
                   <ScrollArea mt="md" sx={{ height: 400 }}>
@@ -218,7 +207,9 @@ function IndexPage() {
                     nothingFound="Nothing found"
                     data={districtsData}
                     value={districtCode}
-                    onChange={setDistrictCode}
+                    onChange={(value) => {
+                      if (value != null) setDistrictCode(value);
+                    }}
                   />
 
                   <ScrollArea mt="md" sx={{ height: 400 }}>
@@ -235,7 +226,9 @@ function IndexPage() {
                     nothingFound="Nothing found"
                     data={subdistrictsData}
                     value={subdistrictCode}
-                    onChange={setSubdistrictCode}
+                    onChange={(value) => {
+                      if (value != null) setSubdistrictCode(value);
+                    }}
                   />
 
                   <ScrollArea mt="md" sx={{ height: 400 }}>
@@ -252,7 +245,9 @@ function IndexPage() {
                     nothingFound="Nothing found"
                     data={villagesData}
                     value={villageCode}
-                    onChange={setVillageCode}
+                    onChange={(value) => {
+                      if (value != null) setVillageCode(value);
+                    }}
                   />
 
                   <ScrollArea mt="md" sx={{ height: 400 }}>
@@ -275,9 +270,9 @@ function IndexPage() {
                 <TextInput
                   label="Search"
                   placeholder="Search..."
-                  value={text}
+                  value={name}
                   onChange={(event) => {
-                    setText(event.target.value);
+                    setName(event.target.value);
                   }}
                 />
 

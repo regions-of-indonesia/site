@@ -12,26 +12,26 @@
   "author": "flamrdevs <flamrdevs@gmail.com>",
   "license": "GPL-3.0",
   "dependencies": {
-    "@emotion/react": "^11.10.4",
+    "@emotion/react": "^11.10.6",
     "@emotion/server": "^11.10.0",
-    "@mantine/core": "^5.5.5",
-    "@mantine/hooks": "^5.5.5",
-    "@mantine/next": "^5.5.5",
-    "@mantine/prism": "^5.5.5",
-    "@regions-of-indonesia/client": "^2.1.0",
-    "@regions-of-indonesia/localforage": "^0.2.0",
-    "@regions-of-indonesia/swr": "^1.2.0",
-    "@tabler/icons": "^1.103.0",
+    "@mantine/core": "^6.0.4",
+    "@mantine/hooks": "^6.0.4",
+    "@mantine/next": "^6.0.4",
+    "@mantine/prism": "^6.0.4",
+    "@regions-of-indonesia/client": "^3.0.0",
+    "@regions-of-indonesia/localforage": "^1.0.0",
+    "@regions-of-indonesia/swr": "^2.5.0",
+    "@tabler/icons-react": "^2.11.0",
     "javascript-yesterday": "^1.2.0",
     "localforage": "^1.10.0",
-    "next": "^12.3.0",
+    "next": "^13.2.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "swr": "^1.3.0"
+    "swr": "^2.1.0"
   },
   "devDependencies": {
-    "@types/node": "18.8.4",
-    "@types/react": "18.0.21",
-    "typescript": "4.8.4"
+    "@types/node": "18.15.5",
+    "@types/react": "18.0.28",
+    "typescript": "5.0.2"
   }
 }
