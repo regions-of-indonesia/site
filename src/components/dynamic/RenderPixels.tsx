@@ -43,4 +43,4 @@ const RenderPixels = memo(() => {
   );
 });
 
-export { RenderPixels };
+export default RenderPixels;
