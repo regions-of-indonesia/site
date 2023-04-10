@@ -4,14 +4,7 @@
 
 # Regions of Indonesia
 
-Regions of Indonesia [site][site]
-
-## Features
-
-- Support both [Dynamic API][github:api] & [Static API][github:static-api]
-- Search API for Dynamic API
-- [Javascript client][github:client]
-- [Documented][docs] with in-app [demo][site]
+Regions of Indonesia [site][site].
 
 ## Packages
 
@@ -29,10 +22,11 @@ Regions of Indonesia [site][site]
 - [x] Plain data
 - [x] Dynamic API & Static API
 - [x] Javascript client
-- [ ] Documentation
+- [x] Documentation
 - [ ] PHP client
 - [ ] Dart client
 - [ ] Python client
+- [ ] (Another) client
 
 ## Types
 
@@ -40,6 +34,13 @@ Regions of Indonesia [site][site]
 type CodeName = {
   code: string;
   name: string;
+};
+
+type RegionResult = {
+  province?: CodeName;
+  district?: CodeName;
+  subdistrict?: CodeName;
+  village?: CodeName;
 };
 
 type SearchResult = {
@@ -67,25 +68,40 @@ Usage
 ```typescript
 // src/libs/client.ts
 
-import { RegionsOfIndonesia } from "@regions-of-indonesia/client";
+import { create } from "@regions-of-indonesia/client";
 
-const client = new RegionsOfIndonesia({
-  baseURL: string, // [OPTIONAL] default is "https://regions-of-indonesia.deno.dev" or "https://regions-of-indonesia.github.io/static-api" if static is true
-  middlewares: Middleware[] // [OPTIONAL] default is log() and cache()
-  static: boolean, // [OPTIONAL] default is false
-});
+const client = create(/** options */);
 
-// Async Await
-async function getProvinces() {
-  const provinces = await client.province.find(); /** provinces is CodeName[] */
-}
-// Promise
-client.province.findByCode("11").then((province) => {
-  console.log(province); /** province is CodeName */
-});
-client.search("some-name").then((result) => {
-  console.log(result); /** result is SearchResult */
-});
+await client.province.find() /** CodeName[] */;
+await client.province.find.by("11") /** CodeName */;
+
+await client.district.find("11") /** CodeName[] */;
+await client.district.find.by("11.01") /** CodeName */;
+
+await client.subdistrict.find("11.01") /** CodeName[] */;
+await client.subdistrict.find.by("11.01.01") /** CodeName */;
+
+await client.village.find("11.01.01") /** CodeName[] */;
+await client.village.find.by("11.01.01.2001") /** CodeName */;
+
+await client.region("11") /** RegionResult  */;
+await client.region("11.01") /** RegionResult  */;
+await client.region("11.01.01") /** RegionResult  */;
+await client.region("11.01.01.2001") /** RegionResult  */;
+
+await client.search("name") /** SearchResult */;
+
+await client.search.provinces("name") /** CodeName[] */;
+await client.province.search("name") /** CodeName[] */;
+
+await client.search.districts("name") /** CodeName[] */;
+await client.district.search("name") /** CodeName[] */;
+
+await client.search.subdistricts("name") /** CodeName[] */;
+await client.subdistrict.search("name") /** CodeName[] */;
+
+await client.search.villages("name") /** CodeName[] */;
+await client.village.search("name") /** CodeName[] */;
 ```
 
 ## Data
@@ -105,10 +121,24 @@ Usage
 ```typescript
 import { PROVINCE, DISTRICT, SUBDISTRICT, VILLAGE } from "@regions-of-indonesia/data";
 
-// PROVINCE is {[key: string]: string}
-// DISTRICT is {[key: string]: string}
-// SUBDISTRICT is {[key: string]: string}
-// VILLAGE is {[key: string]: string}
+console.log(PROVINCE);
+/**
+ * {
+ *   "11": "ACEH",
+ *   "12": "SUMATERA UTARA",
+ *   "13": "SUMATERA BARAT",
+ *   ...
+ * }
+ */
+
+/**
+ * PROVINCE is {[key: string]: string}
+ * DISTRICT is {[key: string]: string}
+ * SUBDISTRICT is {[key: string]: string}
+ * VILLAGE is {[key: string]: string}
+ *
+ * type {[key: string]: string} means, key is region code and value is region name
+ */
 ```
 
 ## Dynamic Endpoints
@@ -126,6 +156,10 @@ import { PROVINCE, DISTRICT, SUBDISTRICT, VILLAGE } from "@regions-of-indonesia/
 | [/subdistrict/11.01.01/villages](https://regions-of-indonesia.deno.dev/subdistrict/11.01.01/villages) | CodeName[]   |
 | [/villages/11.01.01](https://regions-of-indonesia.deno.dev/villages/11.01.01)                         | CodeName[]   |
 | [/village/11.01.01.2001](https://regions-of-indonesia.deno.dev/village/11.01.01.2001)                 | CodeName     |
+| [/region/11](https://regions-of-indonesia.deno.dev/region/11)                                         | RegionResult |
+| [/region/11.01](https://regions-of-indonesia.deno.dev/region/11.01)                                   | RegionResult |
+| [/region/11.01.01](https://regions-of-indonesia.deno.dev/region/11.01.01)                             | RegionResult |
+| [/region/11.01.01.2001](https://regions-of-indonesia.deno.dev/region/11.01.01.2001)                   | RegionResult |
 | [/search?name=aceh](https://regions-of-indonesia.deno.dev/search?name=aceh)                           | SearchResult |
 | [/search/provinces?name=aceh](https://regions-of-indonesia.deno.dev/search/provinces?name=aceh)       | CodeName[]   |
 | [/search/districts?name=aceh](https://regions-of-indonesia.deno.dev/search/districts?name=aceh)       | CodeName[]   |
@@ -148,15 +182,7 @@ import { PROVINCE, DISTRICT, SUBDISTRICT, VILLAGE } from "@regions-of-indonesia/
 | [/villages/11.01.01.json](https://regions-of-indonesia.github.io/static-api/villages/11.01.01.json)                         | CodeName[]  |
 | [/village/11.01.01.2001.json](https://regions-of-indonesia.github.io/static-api/village/11.01.01.2001.json)                 | CodeName    |
 
-## Examples
-
-- [react typescript][github:example-react-ts]
-- [react typescript swr][github:example-react-ts-swr]
-- [react typescript query][github:example-react-ts-query]
-- [solid typescript][github:example-solid-ts]
-- [solid typescript query][github:example-solid-ts-query]
-
-## Credit
+## Data Source
 
 - [cahyadsn - wilayah](https://github.com/cahyadsn/wilayah) - SQL database
 
@@ -170,21 +196,21 @@ import { PROVINCE, DISTRICT, SUBDISTRICT, VILLAGE } from "@regions-of-indonesia/
 
 GPL-3.0
 
-<!--  -->
+<!-- exteral -->
 
 [cover]: https://raw.githubusercontent.com/regions-of-indonesia/regions-of-indonesia/main/public/cover@2.png?sanitize=true
 [logo]: https://raw.githubusercontent.com/regions-of-indonesia/regions-of-indonesia/main/public/logo@2.png?sanitize=true
 [site]: https://regions-of-indonesia.netlify.app
 [docs]: https://docs-regions-of-indonesia.netlify.app
 
-<!--  -->
+<!-- github app -->
 
 [github:api]: https://github.com/regions-of-indonesia/api
 [github:static-api]: https://github.com/regions-of-indonesia/static-api
 [github:site]: https://github.com/regions-of-indonesia/site
 [github:docs]: https://github.com/regions-of-indonesia/docs
 
-<!--  -->
+<!-- github client -->
 
 [github:client]: https://github.com/regions-of-indonesia/client
 [github:data]: https://github.com/regions-of-indonesia/data
@@ -192,7 +218,7 @@ GPL-3.0
 [github:dart-client]: https://github.com/regions-of-indonesia/dart-client
 [github:python-client]: https://github.com/regions-of-indonesia/python-client
 
-<!--  -->
+<!-- github library -->
 
 [github:localforage]: https://github.com/regions-of-indonesia/localforage
 [github:swr]: https://github.com/regions-of-indonesia/swr
@@ -201,19 +227,7 @@ GPL-3.0
 [github:vue-query]: https://github.com/regions-of-indonesia/vue-query
 [github:svelte-query]: https://github.com/regions-of-indonesia/svelte-query
 
-<!--  -->
-
-[github:example-react-ts]: https://github.com/regions-of-indonesia/example-react-ts
-[github:example-react-ts-swr]: https://github.com/regions-of-indonesia/example-react-ts-swr
-[github:example-react-ts-query]: https://github.com/regions-of-indonesia/example-react-ts-query
-[github:example-solid-ts]: https://github.com/regions-of-indonesia/example-solid-ts
-[github:example-solid-ts-query]: https://github.com/regions-of-indonesia/example-solid-ts-query
-[github:example-vue-ts]: https://github.com/regions-of-indonesia/example-vue-ts
-[github:example-vue-ts-query]: https://github.com/regions-of-indonesia/example-vue-ts-query
-[github:example-svelte-ts]: https://github.com/regions-of-indonesia/example-svelte-ts
-[github:example-svelte-ts-query]: https://github.com/regions-of-indonesia/example-svelte-ts-query
-
-<!--  -->
+<!-- support -->
 
 [support:ko-fi]: https://ko-fi.com/flamrdevs
 [support:ko-fi-button]: https://flamrdevs.vercel.app/ko-fi.png

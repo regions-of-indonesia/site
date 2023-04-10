@@ -3,6 +3,8 @@ import { memo } from "react";
 import type { GetLayout } from "next";
 import type { AppPropsWithLayout } from "next/app";
 
+import { SWRConfig } from "swr";
+
 import { APP } from "~/const/app";
 
 import { Head, ThemeProvider } from "~/components/core";
@@ -40,7 +42,9 @@ const _App = ({ Component, pageProps }: _AppProps) => {
     <>
       <AppHead />
 
-      <ThemeProvider>{getLayout(<Component {...pageProps} />)}</ThemeProvider>
+      <SWRConfig>
+        <ThemeProvider>{getLayout(<Component {...pageProps} />)}</ThemeProvider>
+      </SWRConfig>
     </>
   );
 };

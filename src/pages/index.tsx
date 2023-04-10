@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { memo, useEffect, useMemo, useState } from "react";
 
 import {
   ActionIcon,
@@ -6,27 +6,33 @@ import {
   Badge,
   Box,
   Button,
+  Center,
   Container,
   Grid,
   Group,
-  ScrollArea,
+  List,
+  Loader,
+  Modal,
+  Paper,
   Select,
   Stack,
   Table,
   Text,
   TextInput,
+  ThemeIcon,
   Tooltip,
   useMantineColorScheme,
 } from "@mantine/core";
-import type { MantineColor, SelectItem } from "@mantine/core";
-import { Prism } from "@mantine/prism";
+import type { CSSObject, MantineTheme, ModalProps } from "@mantine/core";
+import type { SelectItem } from "@mantine/core";
 
-import { IconArrowRight, IconBrandGithub, IconMoon, IconSun } from "@tabler/icons-react";
+import { IconBooks, IconBrandGithub, IconCircleCheck, IconMoon, IconSearch, IconSelect, IconSun } from "@tabler/icons-react";
 
 import type { CodeName } from "@regions-of-indonesia/client";
 
 import { APP } from "~/const/app";
 import { useProvinces, useDistricts, useSubdistricts, useVillages, useSearch } from "~/hooks/regions-of-indonesia-swr";
+import { RenderPixels } from "~/components/core";
 
 function codenameToData(codenames: CodeName[]): SelectItem[] {
   return codenames.map(({ code, name }) => {
@@ -51,6 +57,26 @@ function transposeSearch(search: { provinces: CodeName[]; districts: CodeName[];
   return array;
 }
 
+function DocsButtoLink() {
+  return (
+    <Tooltip label="Docs" withinPortal>
+      <Button component="a" href={APP.link.docs} variant="filled" leftIcon={<IconBooks />} aria-label="Docs">
+        Docs
+      </Button>
+    </Tooltip>
+  );
+}
+
+function GithubButtoLink() {
+  return (
+    <Tooltip label="Github" withinPortal>
+      <Button component="a" href={APP.link.github} variant="outline" leftIcon={<IconBrandGithub />} aria-label="Github">
+        Github
+      </Button>
+    </Tooltip>
+  );
+}
+
 function GithubLink() {
   return (
     <Tooltip label="Github" withinPortal>
@@ -73,20 +99,16 @@ function ColorSchemeToggler() {
   );
 }
 
-function IndexPage() {
+const SelectModal = memo((props: ModalProps) => {
   const [provinceCode, setProvinceCode] = useState<string>(""),
     [districtCode, setDistrictCode] = useState<string>(""),
     [subdistrictCode, setSubdistrictCode] = useState<string>(""),
     [villageCode, setVillageCode] = useState<string>("");
 
-  const [name, setName] = useState<string>("");
-
-  const { data: provinces } = useProvinces(),
-    { data: districts } = useDistricts(provinceCode),
-    { data: subdistricts } = useSubdistricts(districtCode),
-    { data: villages } = useVillages(subdistrictCode);
-
-  const { data: search } = useSearch(name);
+  const { data: provinces, isLoading: isProvincesLoading } = useProvinces(),
+    { data: districts, isLoading: isDistrictsLoading } = useDistricts(provinceCode),
+    { data: subdistricts, isLoading: isSubdistrictsLoading } = useSubdistricts(districtCode),
+    { data: villages, isLoading: isVillagesLoading } = useVillages(subdistrictCode);
 
   useEffect(() => {
     setDistrictCode("");
@@ -105,49 +127,148 @@ function IndexPage() {
     subdistrictsData = useMemo(() => (subdistricts ? codenameToData(subdistricts) : []), [JSON.stringify(subdistricts)]),
     villagesData = useMemo(() => (villages ? codenameToData(villages) : []), [JSON.stringify(villages)]);
 
+  const getNothingFound = (loading: boolean) => <Center> {loading ? <Loader /> : "Nothing Found"}</Center>;
+
+  return (
+    <Modal title="Select" size="clamp(20rem, 90vw, 70rem)" {...props}>
+      <Box p="sm">
+        <Grid gutter="xl">
+          <Grid.Col span={12} md={6} xl={3}>
+            <Select
+              sx={{ flexGrow: 1 }}
+              label="Province"
+              placeholder="Pick province..."
+              nothingFound={getNothingFound(isProvincesLoading)}
+              data={provincesData}
+              value={provinceCode}
+              onChange={(value) => {
+                if (value != null) setProvinceCode(value);
+              }}
+              withinPortal
+              data-autofocus
+            />
+          </Grid.Col>
+
+          <Grid.Col span={12} md={6} xl={3}>
+            <Select
+              sx={{ flexGrow: 1 }}
+              label="District"
+              placeholder="Pick district..."
+              nothingFound={getNothingFound(isDistrictsLoading)}
+              data={districtsData}
+              value={districtCode}
+              onChange={(value) => {
+                if (value != null) setDistrictCode(value);
+              }}
+              withinPortal
+            />
+          </Grid.Col>
+
+          <Grid.Col span={12} md={6} xl={3}>
+            <Select
+              sx={{ flexGrow: 1 }}
+              label="Subdistrict"
+              placeholder="Pick subdistrict..."
+              nothingFound={getNothingFound(isSubdistrictsLoading)}
+              data={subdistrictsData}
+              value={subdistrictCode}
+              onChange={(value) => {
+                if (value != null) setSubdistrictCode(value);
+              }}
+              withinPortal
+            />
+          </Grid.Col>
+
+          <Grid.Col span={12} md={6} xl={3}>
+            <Select
+              sx={{ flexGrow: 1 }}
+              label="Village"
+              placeholder="Pick village..."
+              nothingFound={getNothingFound(isVillagesLoading)}
+              data={villagesData}
+              value={villageCode}
+              onChange={(value) => {
+                if (value != null) setVillageCode(value);
+              }}
+              withinPortal
+            />
+          </Grid.Col>
+        </Grid>
+      </Box>
+    </Modal>
+  );
+});
+
+const SearchModal = memo((props: ModalProps) => {
+  const [name, setName] = useState<string>("");
+
+  const { data: search } = useSearch(name);
+
   const transposedSearch = useMemo(() => (search ? transposeSearch(search) : []), [JSON.stringify(search)]);
 
-  const prismStringify = useCallback((value: any) => JSON.stringify(value, null, 2), []),
-    getHighlightLines = useCallback((codenames: CodeName[], selectedCode: string) => {
-      type Result = Record<string, { color: MantineColor; label?: string }>;
+  return (
+    <Modal title="Search" size="clamp(20rem, 90vw, 70rem)" {...props}>
+      <Box p="sm">
+        <Stack>
+          <TextInput
+            label="Search"
+            placeholder="Name..."
+            value={name}
+            onChange={(event) => {
+              setName(event.target.value);
+            }}
+            data-autofocus
+          />
 
-      if (codenames.length === 0 || !selectedCode) return {} as Result;
+          <Table>
+            <thead>
+              <tr>
+                <th>Provinces</th>
+                <th>Districts</th>
+                <th>Subdistricts</th>
+                <th>Villages</th>
+              </tr>
+            </thead>
+            <tbody>
+              {transposedSearch.map(({ key, province, district, subdistrict, village }) => (
+                <tr key={key}>
+                  <td>{province && province.name}</td>
+                  <td>{district && district.name}</td>
+                  <td>{subdistrict && subdistrict.name}</td>
+                  <td>{village && village.name}</td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </Stack>
+      </Box>
+    </Modal>
+  );
+});
 
-      const index = codenames.findIndex(({ code }) => code === selectedCode);
+const sxPaperButton = (theme: MantineTheme): CSSObject => ({
+  width: "100%",
+  cursor: "pointer",
 
-      if (index < 0) return {} as Result;
+  ":hover": {
+    backgroundColor: theme.colorScheme === "dark" ? theme.colors.dark[6] : theme.colors.gray[0],
+  },
+});
 
-      const value = 1 + (1 + index * 4);
+function IndexPage() {
+  const [open, setOpen] = useState<"select" | "region" | "search" | null>(null);
 
-      const lines = Array(4)
-        .fill(null)
-        .map((_, i) => i + value);
-
-      const property: Result[string] = { color: "primary", label: "|" };
-
-      return lines.reduce(
-        (obj, line) => {
-          obj[line] = property;
-          return obj;
-        },
-        { [`${value}`]: { color: "green" } } as Result
-      );
-    }, []);
-
-  const getPrismProperties = useCallback((codenames: CodeName[], selectedCode: string) => {
-      return { children: prismStringify(codenames), highlightLines: getHighlightLines(codenames, selectedCode) };
-    }, []),
-    prismProvinces = useMemo(() => getPrismProperties(provinces || [], provinceCode), [JSON.stringify(provinces), provinceCode]),
-    prismDistricts = useMemo(() => getPrismProperties(districts || [], districtCode), [JSON.stringify(districts), districtCode]),
-    prismSubdistricts = useMemo(
-      () => getPrismProperties(subdistricts || [], subdistrictCode),
-      [JSON.stringify(subdistricts), subdistrictCode]
-    ),
-    prismVillages = useMemo(() => getPrismProperties(villages || [], villageCode), [JSON.stringify(villages), villageCode]);
+  const handleClose = () => {
+    setOpen(null);
+  };
 
   return (
     <>
-      <Container size="xl">
+      <Box pos="fixed" top={0} left={0} w="100vw" h="100vh" sx={{ zIndex: 0 }}>
+        <RenderPixels />
+      </Box>
+
+      <Container size="xl" sx={{ position: "relative", zIndex: 100 }}>
         <Group position="apart" py="xs">
           <Group>
             <Anchor href="/" size="xl" variant="text" weight={700}>
@@ -158,11 +279,7 @@ function IndexPage() {
           </Group>
 
           <Group>
-            <Tooltip label="Documentation" withinPortal>
-              <Button component="a" href={APP.link.docs} rightIcon={<IconArrowRight />} variant="outline">
-                Docs
-              </Button>
-            </Tooltip>
+            <Badge variant="outline">v4.0.0</Badge>
 
             <GithubLink />
 
@@ -171,136 +288,97 @@ function IndexPage() {
         </Group>
       </Container>
 
-      <Container size="xl">
-        <Stack p="md" spacing="xl">
-          <Stack my="md">
-            <Text align="center" size="xl">
-              Basic
-            </Text>
+      <Container size="md" sx={{ position: "relative", zIndex: 200 }}>
+        <Box p="xl">
+          <Grid p="xl" gutter="xl">
+            <Grid.Col span={12} md={6}>
+              <Paper
+                p="xl"
+                component="button"
+                withBorder
+                onClick={() => {
+                  setOpen("select");
+                }}
+                sx={sxPaperButton}
+              >
+                <Group position="apart">
+                  <Text size="xl">Select</Text>
+                  <IconSelect size={32} />
+                </Group>
+              </Paper>
+            </Grid.Col>
 
-            <Box>
-              <Grid gutter="xl">
-                <Grid.Col span={12} md={6} xl={3}>
-                  <Select
-                    sx={{ flexGrow: 1 }}
-                    label="Province"
-                    placeholder="Pick province..."
-                    nothingFound="Nothing found"
-                    data={provincesData}
-                    value={provinceCode}
-                    onChange={(value) => {
-                      if (value != null) setProvinceCode(value);
-                    }}
-                  />
+            {/* <Grid.Col span={12} md={6}>
+              <Paper
+                p="xl"
+                component="button"
+                
+                withBorder
+                onClick={() => {
+                  setOpen("region");
+                }}
+                sx={sxPaperButton}
+              >
+                <Group position="apart">
+                  <Text size="xl">Region</Text>
+                  <IconBinaryTree size={32} />
+                </Group>
+              </Paper>
+            </Grid.Col> */}
 
-                  <ScrollArea mt="md" sx={{ height: 400 }}>
-                    <Prism language="json" noCopy withLineNumbers highlightLines={prismProvinces.highlightLines}>
-                      {prismProvinces.children}
-                    </Prism>
-                  </ScrollArea>
-                </Grid.Col>
-                <Grid.Col span={12} md={6} xl={3}>
-                  <Select
-                    sx={{ flexGrow: 1 }}
-                    label="District"
-                    placeholder="Pick district..."
-                    nothingFound="Nothing found"
-                    data={districtsData}
-                    value={districtCode}
-                    onChange={(value) => {
-                      if (value != null) setDistrictCode(value);
-                    }}
-                  />
+            <Grid.Col span={12} md={6}>
+              <Paper
+                p="xl"
+                component="button"
+                withBorder
+                onClick={() => {
+                  setOpen("search");
+                }}
+                sx={sxPaperButton}
+              >
+                <Group position="apart">
+                  <Text size="xl">Search</Text>
+                  <IconSearch size={32} />
+                </Group>
+              </Paper>
+            </Grid.Col>
+          </Grid>
+        </Box>
 
-                  <ScrollArea mt="md" sx={{ height: 400 }}>
-                    <Prism language="json" noCopy withLineNumbers highlightLines={prismDistricts.highlightLines}>
-                      {prismDistricts.children}
-                    </Prism>
-                  </ScrollArea>
-                </Grid.Col>
-                <Grid.Col span={12} md={6} xl={3}>
-                  <Select
-                    sx={{ flexGrow: 1 }}
-                    label="Subdistrict"
-                    placeholder="Pick subdistrict..."
-                    nothingFound="Nothing found"
-                    data={subdistrictsData}
-                    value={subdistrictCode}
-                    onChange={(value) => {
-                      if (value != null) setSubdistrictCode(value);
-                    }}
-                  />
+        <Box p="xl">
+          <Container size="xs">
+            <Paper p="xl" withBorder>
+              <List
+                spacing="sm"
+                size="sm"
+                center
+                icon={
+                  <ThemeIcon size={24}>
+                    <IconCircleCheck size="1.25rem" />
+                  </ThemeIcon>
+                }
+              >
+                <List.Item>First class Typescript support</List.Item>
+                <List.Item>Framework Agnostic</List.Item>
+                <List.Item>Out of box integration libraries.</List.Item>
+                <List.Item>Open Source under GPL-3.0</List.Item>
+              </List>
+            </Paper>
+          </Container>
+        </Box>
 
-                  <ScrollArea mt="md" sx={{ height: 400 }}>
-                    <Prism language="json" noCopy withLineNumbers highlightLines={prismSubdistricts.highlightLines}>
-                      {prismSubdistricts.children}
-                    </Prism>
-                  </ScrollArea>
-                </Grid.Col>
-                <Grid.Col span={12} md={6} xl={3}>
-                  <Select
-                    sx={{ flexGrow: 1 }}
-                    label="Village"
-                    placeholder="Pick village..."
-                    nothingFound="Nothing found"
-                    data={villagesData}
-                    value={villageCode}
-                    onChange={(value) => {
-                      if (value != null) setVillageCode(value);
-                    }}
-                  />
+        <Box p="xl">
+          <Group position="center" spacing="md">
+            <DocsButtoLink />
 
-                  <ScrollArea mt="md" sx={{ height: 400 }}>
-                    <Prism language="json" noCopy withLineNumbers highlightLines={prismVillages.highlightLines}>
-                      {prismVillages.children}
-                    </Prism>
-                  </ScrollArea>
-                </Grid.Col>
-              </Grid>
-            </Box>
-          </Stack>
-
-          <Stack my="md">
-            <Text align="center" size="xl">
-              Search
-            </Text>
-
-            <Box>
-              <Stack>
-                <TextInput
-                  label="Search"
-                  placeholder="Search..."
-                  value={name}
-                  onChange={(event) => {
-                    setName(event.target.value);
-                  }}
-                />
-
-                <Table>
-                  <thead>
-                    <tr>
-                      <th>Provinces</th>
-                      <th>Districts</th>
-                      <th>Subdistricts</th>
-                      <th>Villages</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {transposedSearch.map(({ key, province, district, subdistrict, village }) => (
-                      <tr key={key}>
-                        <td>{province && province.name}</td>
-                        <td>{district && district.name}</td>
-                        <td>{subdistrict && subdistrict.name}</td>
-                        <td>{village && village.name}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </Table>
-              </Stack>
-            </Box>
-          </Stack>
-        </Stack>
+            <GithubButtoLink />
+          </Group>
+        </Box>
       </Container>
+
+      <SelectModal opened={open === "select"} onClose={handleClose} />
+
+      <SearchModal opened={open === "search"} onClose={handleClose} />
     </>
   );
 }
