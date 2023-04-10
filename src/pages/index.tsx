@@ -6,6 +6,7 @@ import {
   Badge,
   Box,
   Button,
+  Center,
   Container,
   Grid,
   Group,
@@ -70,6 +71,9 @@ function ColorSchemeToggler() {
   );
 }
 
+const sxActionHeader = (theme: MantineTheme): CSSObject => ({ [theme.fn.smallerThan("sm")]: { display: "none" } });
+const sxActionMain = (theme: MantineTheme): CSSObject => ({ [theme.fn.largerThan("sm")]: { display: "none" } });
+
 const sxPaperButton = (theme: MantineTheme): CSSObject => ({
   width: "100%",
   cursor: "pointer",
@@ -102,7 +106,7 @@ function IndexPage() {
             <Badge variant="outline">Beta</Badge>
           </Group>
 
-          <Group>
+          <Group sx={sxActionHeader}>
             <Badge variant="outline">v4.0.0</Badge>
 
             <GithubLink />
@@ -114,6 +118,29 @@ function IndexPage() {
 
       <Container size="md" sx={{ position: "relative", zIndex: 200 }}>
         <Box p="xl">
+          <Text
+            sx={(theme) => ({
+              fontSize: "4rem",
+              textAlign: "center",
+              [theme.fn.smallerThan("lg")]: { fontSize: "3rem" },
+              [theme.fn.smallerThan("sm")]: { fontSize: "2rem" },
+            })}
+          >
+            Regions of Indonesia
+          </Text>
+
+          <Center mt="md">
+            <Group sx={sxActionMain}>
+              <Badge variant="outline">v4.0.0</Badge>
+
+              <GithubLink />
+
+              <ColorSchemeToggler />
+            </Group>
+          </Center>
+        </Box>
+
+        <Box p={{ xs: "sm", md: "md", xl: "lg" }}>
           <Grid p="xl" gutter="xl">
             <Grid.Col span={12} md={6}>
               <Paper
