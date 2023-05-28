@@ -1,6 +1,0 @@
-[build.environment]
-  NPM_FLAGS="--version"
-
-[build]
-  command = "pnpm run build"
-  publish = ".next"

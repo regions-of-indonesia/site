@@ -1,3 +1,12 @@
-.tabler-icon {
-  stroke-width: 1;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @apply bg-neutral-1 text-neutral-12 font-mono;
 }

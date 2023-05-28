@@ -1,0 +1,24 @@
+---
+import MetaTagsPrimary from "./MetaTagsPrimary.astro";
+import MetaTagsOpenGraph from "./MetaTagsOpenGraph.astro";
+import MetaTagsTwitter from "./MetaTagsTwitter.astro";
+
+type Props = {
+  favicon: string;
+  title: string;
+  description: string;
+  url: string;
+  image: string;
+};
+
+const { favicon, title, description, url, image } = Astro.props;
+---
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="icon" type="image/x-icon" href={favicon} />
+
+<MetaTagsPrimary title={title} description={description} />
+<MetaTagsOpenGraph title={title} description={description} url={url} image={image} />
+<MetaTagsTwitter title={title} description={description} url={url} image={image} />

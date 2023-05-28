@@ -1,0 +1,31 @@
+---
+import "~/styles/globals.css";
+
+import HTML from "./HTML.astro";
+import PrimaryMetaTags from "./PrimaryMetaTags.astro";
+
+type Props = {
+  favicon?: string;
+  title?: string;
+  description?: string;
+  url?: string;
+  image?: string;
+};
+
+const {
+  favicon = "https://regions-of-indonesia.netlify.app/favicon.ico",
+  title = "regions of indonesia",
+  description = "regions of indonesia",
+  url = "https://regions-of-indonesia.netlify.app",
+  image = "https://regions-of-indonesia.netlify.app/image.png",
+} = Astro.props;
+---
+
+<HTML data-theme="dark">
+  <Fragment slot="head">
+    <PrimaryMetaTags favicon={favicon} title={title} description={description} url={url} image={image} />
+  </Fragment>
+  <Fragment slot="body">
+    <slot />
+  </Fragment>
+</HTML>
