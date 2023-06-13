@@ -5,7 +5,6 @@ import HTML from "./HTML.astro";
 import PrimaryMetaTags from "./PrimaryMetaTags.astro";
 
 type Props = {
-  favicon?: string;
   title?: string;
   description?: string;
   url?: string;
@@ -13,7 +12,6 @@ type Props = {
 };
 
 const {
-  favicon = "https://regions-of-indonesia.netlify.app/favicon.ico",
   title = "regions of indonesia",
   description = "regions of indonesia",
   url = "https://regions-of-indonesia.netlify.app",
@@ -23,7 +21,9 @@ const {
 
 <HTML data-theme="dark">
   <Fragment slot="head">
-    <PrimaryMetaTags favicon={favicon} title={title} description={description} url={url} image={image} />
+    <PrimaryMetaTags title={title} description={description} url={url} image={image} />
+
+    <slot name="head" />
   </Fragment>
   <Fragment slot="body">
     <slot />
