@@ -12,6 +12,7 @@
     "@kobalte/core": "^0.9.6",
     "astro": "^2.6.3",
     "dayjs": "^1.11.8",
+    "lucide-solid": "^0.244.0",
     "solid-js": "^1.7.6"
   },
   "devDependencies": {

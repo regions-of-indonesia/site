@@ -1,10 +1,21 @@
 ---
+import { GithubIcon } from "lucide-solid";
+
 import DefaultHTML from "~/ui/astro/DefaultHTML.astro";
+import { Button, IconButton } from "~/ui/solid";
+
+import * as HOST from "~/utils/host";
 ---
 
-<DefaultHTML title="regions of indonesia" description="regions of indonesia" url="https://regions-of-indonesia.pages.dev">
+<DefaultHTML>
   <div>
-    <h1 class="text-5xl text-primary-11 text-center font-bold">Regions of Indonesia</h1>
-    <h2 class="text-3xl text-primary-11 text-center font-medium">coming soon</h2>
+    <h1 class="text-5xl text-primary-11 text-center font-bold select-none">Regions of Indonesia</h1>
+    <h2 class="text-3xl text-primary-11 text-center font-medium select-none">coming soon</h2>
+    <div class="flex justify-center items-center gap-3 p-2">
+      <Button client:idle as="a" href={HOST.DOCS()} target="_blank">Docs</Button>
+      <IconButton client:idle as="a" href="https://github.com/regions-of-indonesia" target="_blank">
+        <GithubIcon client:idle />
+      </IconButton>
+    </div>
   </div>
 </DefaultHTML>

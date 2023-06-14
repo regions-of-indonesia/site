@@ -1,14 +1,14 @@
 import type { Config } from "tailwindcss";
 
-import coloradix, { gray, indigo } from "@coloradix/tailwindcss";
+import coloradix, { gray, red } from "@coloradix/tailwindcss";
 
 const radix = coloradix({
   gray,
-  indigo,
+  red,
 })
   .alias({
     neutral: "gray",
-    primary: "indigo",
+    primary: "red",
   })
   .overlay(true)
   .enable(true);

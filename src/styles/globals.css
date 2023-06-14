@@ -10,3 +10,7 @@ body {
   align-items: center;
   @apply bg-neutral-1 text-neutral-12 font-mono;
 }
+
+.lucide {
+  stroke-width: 1.5;
+}
