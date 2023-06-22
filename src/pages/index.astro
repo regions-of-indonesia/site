@@ -1,13 +1,12 @@
 ---
 import { GithubIcon } from "lucide-solid";
 
-import DefaultHTML from "~/ui/astro/DefaultHTML.astro";
-import { Button, IconButton } from "~/ui/solid";
+import { HTMLX, Button, IconButton } from "~/components/core";
 
 import * as HOST from "~/utils/host";
 ---
 
-<DefaultHTML>
+<HTMLX>
   <div>
     <h1 class="text-5xl text-primary-11 text-center font-bold select-none">Regions of Indonesia</h1>
     <h2 class="text-3xl text-primary-11 text-center font-medium select-none">coming soon</h2>
@@ -18,4 +17,4 @@ import * as HOST from "~/utils/host";
       </IconButton>
     </div>
   </div>
-</DefaultHTML>
+</HTMLX>
