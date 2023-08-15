@@ -1,4 +1,4 @@
-import * as HOST from "~/const/host";
+import { HOST } from "~/const";
 
 export const SITE = (...paths: string[]) => [import.meta.env.MODE === "development" ? HOST.SITE_DEV : HOST.SITE_PROD, ...paths].join("/");
 

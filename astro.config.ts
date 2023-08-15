@@ -7,7 +7,14 @@ import compress from "astro-compress";
 
 export default {
   site: "https://regions-of-indonesia.netlify.app",
-  integrations: [tailwind(), solid(), sitemap(), compress()],
+  integrations: [
+    tailwind(),
+    solid(),
+    sitemap(),
+    compress({
+      Logger: 0,
+    }),
+  ],
   server: { host: true, port: 1708 },
   compressHTML: true,
 } satisfies AstroUserConfig;

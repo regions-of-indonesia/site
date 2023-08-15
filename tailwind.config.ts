@@ -1,14 +1,16 @@
 import type { Config } from "tailwindcss";
 
-import coloradix, { gray, red } from "@coloradix/tailwindcss";
+import kobalte from "@kobalte/tailwindcss";
+
+import coloradix, { mauve, orange } from "@coloradix/tailwindcss";
 
 const radix = coloradix({
-  gray,
-  red,
+  mauve,
+  orange,
 })
   .alias({
-    neutral: "gray",
-    primary: "red",
+    neutral: "mauve",
+    primary: "orange",
   })
   .overlay(true)
   .enable(true);
@@ -19,5 +21,5 @@ export default {
     colors: radix.colors,
     extend: {},
   },
-  plugins: [radix.plugin],
+  plugins: [radix.plugin, kobalte({})],
 } satisfies Config;

@@ -2,17 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  -webkit-tap-highlight-color: transparent;
+}
+
 body {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  @apply bg-neutral-1 text-neutral-12 font-mono;
+  @apply fixed items-center justify-center w-screen h-screen overflow-hidden bg-neutral-1 text-neutral-12 font-mono;
 }
 
 .lucide {
   width: 18px;
   height: 18px;
-  stroke-width: 1.5;
+  stroke-width: 2;
 }

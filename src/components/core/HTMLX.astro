@@ -1,7 +1,7 @@
 ---
-import * as HOST from "~/utils/host";
-
 import "~/styles/globals.css";
+
+import { HOST } from "~/utils";
 
 type Props = {
   title?: string;
@@ -13,7 +13,7 @@ type Props = {
 const TITLE_DEFAULT = "Regions of Indonesia";
 const DESCRIPTION_DEFAULT = "Regions of Indonesia";
 const URL_DEFAULT = HOST.SITE();
-const IMAGE_DEFAULT = HOST.SITE("image.png");
+const IMAGE_DEFAULT = HOST.SITE("cover-1200x628.png");
 
 const { title = TITLE_DEFAULT, description = DESCRIPTION_DEFAULT, url = URL_DEFAULT, image = IMAGE_DEFAULT } = Astro.props;
 ---
