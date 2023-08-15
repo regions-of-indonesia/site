@@ -2,7 +2,9 @@
   <img src="https://regions-of-indonesia.pages.dev/cover-2100x900.png" width="100%" />
 </p>
 
-<p align="center">
+# Regions of Indonesia
+
+<p align="left">
   <a title="Site" href="https://regions-of-indonesia.netlify.app">
     <picture>
       <source media="(prefers-color-scheme: dark)" srcset="https://none.deno.dev/ui/button/lucide?t=dark&i=external-link&e=Site">
@@ -17,4 +19,6 @@
   </a>
 </p>
 
-# Regions of Indonesia
+## License
+
+[GPL-3.0](https://github.com/regions-of-indonesia/site/blob/main/LICENSE)
