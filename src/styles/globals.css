@@ -7,7 +7,7 @@ html {
 }
 
 body {
-  @apply fixed items-center justify-center w-screen h-screen overflow-hidden bg-neutral-1 text-neutral-12 font-mono;
+  @apply flex items-center justify-center w-screen h-screen overflow-hidden bg-neutral-1 text-neutral-12 font-mono;
 }
 
 .lucide {
