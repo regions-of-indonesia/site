@@ -1,3 +1,4 @@
+import defaultTheme from "tailwindcss/defaultTheme";
 import type { Config } from "tailwindcss";
 
 import kobalte from "@kobalte/tailwindcss";
@@ -19,7 +20,10 @@ export default {
   content: ["src/**/*.{astro,ts,tsx}"],
   theme: {
     colors: radix.colors,
-    extend: {},
+    fontFamily: {
+      sans: ["Inter", ...defaultTheme.fontFamily.sans],
+      mono: ["Source Code Pro", ...defaultTheme.fontFamily.mono],
+    },
   },
   plugins: [radix.plugin, kobalte({})],
 } satisfies Config;
