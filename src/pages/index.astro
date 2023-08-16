@@ -1,12 +1,28 @@
 ---
 import { GithubIcon } from "lucide-solid";
 
+import pixel from "~/const/pixel";
+
 import { HTMLX, Button, IconButton } from "~/components/core";
 
 import { HOST } from "~/utils";
 ---
 
 <HTMLX>
+  <div class="absolute inset-0">
+    {
+      pixel.map((el) => {
+        return (
+          <div class={"pxy"}>
+            {el.map((value) => (
+              <div class={`pxx pxx${value}`} />
+            ))}
+          </div>
+        );
+      })
+    }
+  </div>
+
   <div class="p-7">
     <h1 class="text-5xl text-primary-11 text-center font-bold select-none">Regions of Indonesia</h1>
     <h2 class="text-3xl text-primary-11 text-center font-medium select-none">coming soon</h2>

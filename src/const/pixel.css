@@ -1,0 +1,24 @@
+.pxy {
+  display: flex;
+  justify-content: center;
+}
+
+.pxy:hover {
+  --shadow: var(--neutral-12);
+}
+
+.pxx {
+  flex-shrink: 0;
+  width: 1px;
+  height: 1px;
+  margin: 4px;
+  border-radius: 100%;
+}
+
+.pxx1 {
+  background-color: hsl(var(--shadow, var(--neutral-9)));
+}
+
+.pxx0 {
+  background-color: transparent;
+}
