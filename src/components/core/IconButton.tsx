@@ -17,7 +17,7 @@ const IconButton = klassed(
       },
     },
     defaultVariants: {
-      color: "primary",
+      color: "neutral",
       size: "md",
     },
   },

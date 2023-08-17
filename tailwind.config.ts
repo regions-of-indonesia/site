@@ -19,7 +19,10 @@ const radix = coloradix({
 export default {
   content: ["src/**/*.{astro,ts,tsx}"],
   theme: {
-    colors: radix.colors,
+    colors: {
+      transparent: "transparent",
+      ...radix.colors,
+    },
     fontFamily: {
       sans: ["Inter", ...defaultTheme.fontFamily.sans],
       mono: ["Source Code Pro", ...defaultTheme.fontFamily.mono],

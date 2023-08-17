@@ -17,7 +17,7 @@ const Button = klassed(
       },
     },
     defaultVariants: {
-      color: "primary",
+      color: "neutral",
       size: "md",
     },
   },
