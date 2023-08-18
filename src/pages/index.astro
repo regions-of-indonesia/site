@@ -9,7 +9,7 @@ import { HOST } from "~/utils";
 ---
 
 <HTMLX>
-  <div class="absolute inset-0 z-0">
+  <div class="absolute inset-0 z-0 overflow-hidden">
     {
       pixel.map((el) => {
         return (
@@ -24,7 +24,7 @@ import { HOST } from "~/utils";
   </div>
 
   <div class="p-7 z-10">
-    <h1 class="text-5xl text-neutral-11 text-center font-bold select-none">Regions of Indonesia</h1>
+    <h1 class="text-3xl lg:text-5xl text-neutral-11 text-center font-bold select-none">Regions of Indonesia</h1>
     <div class="flex flex-col gap-1 mt-3 mb-1">
       <div class="h-px bg-gradient-to-r from-transparent via-[#ff0000] to-transparent rounded-full"></div>
       <div class="h-px bg-gradient-to-r from-transparent via-[#ffffff] to-transparent rounded-full"></div>
