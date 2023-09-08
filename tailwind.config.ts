@@ -13,8 +13,7 @@ const radix = coloradix({
     neutral: "mauve",
     primary: "orange",
   })
-  .overlay(true)
-  .enable(true);
+  .build();
 
 export default {
   content: ["src/**/*.{astro,ts,tsx}"],
