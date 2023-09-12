@@ -7,11 +7,21 @@ html {
 }
 
 body {
-  @apply flex items-center justify-center w-screen h-screen overflow-hidden bg-neutral-1 text-neutral-12 font-mono;
+  @apply bg-neutral-1 text-neutral-12 font-mono;
 }
 
-.lucide {
-  width: 18px;
-  height: 18px;
-  stroke-width: 2;
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--neutral-6));
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--neutral-8));
 }

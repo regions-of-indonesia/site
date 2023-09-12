@@ -10,6 +10,12 @@ dependencies:
   '@kobalte/core':
     specifier: ^0.11.0
     version: 0.11.0(solid-js@1.7.11)
+  '@regions-of-indonesia/client':
+    specifier: ^5.1.1
+    version: 5.1.1
+  '@regions-of-indonesia/utils':
+    specifier: ^5.0.1
+    version: 5.0.1
   astro:
     specifier: ^3.0.12
     version: 3.0.12
@@ -45,6 +51,9 @@ devDependencies:
   '@radix-ui/colors':
     specifier: ^2.1.0
     version: 2.1.0
+  '@regions-of-indonesia/types':
+    specifier: ^5.0.1
+    version: 5.0.1
   astro-compress:
     specifier: ^2.0.15
     version: 2.0.15
@@ -1009,6 +1018,18 @@ packages:
   /@radix-ui/colors@2.1.0:
     resolution: {integrity: sha512-gcBnxjS2u2c6thQz/9K1+Pt2ZYcm5WKU4SLi0emYkRmYbVUw+37rlc5wgLtYOsSsRP9nxVtbJJYj6WVO7UUmZg==}
     dev: true
+
+  /@regions-of-indonesia/client@5.1.1:
+    resolution: {integrity: sha512-T1+SFAe4W6TKsgWjUzM6R2UBX8A9LGDVDq32xELSMDR0uUeoweAPCoDoWT2zC3++fQ0TvlDW8X/dhNknoRbjxQ==}
+    dev: false
+
+  /@regions-of-indonesia/types@5.0.1:
+    resolution: {integrity: sha512-uf8MB/0BgwQ+SdvgAR0E8KmFCKPSC8q4Hy2ubvaLm/NKJVfhkyjElXMBDwdWMq8qd9LRNtsezvkYG/saimEhHg==}
+    dev: true
+
+  /@regions-of-indonesia/utils@5.0.1:
+    resolution: {integrity: sha512-bFFdE6lWtlhaZzPQ6go7oQ0yDMO2/skqV8t8KC2MrbUGkbF3x451SZqDSFdzIIUtKLl1e6G1U//4Ru5v/UONeA==}
+    dev: false
 
   /@solid-primitives/event-listener@2.3.0(solid-js@1.7.11):
     resolution: {integrity: sha512-0DS7DQZvCExWSpurVZC9/wjI8RmkhuOtWOy6Pp1Woq9ElMT9/bfjNpkwXsOwisLpcTqh9eUs17kp7jtpWcC20w==}
