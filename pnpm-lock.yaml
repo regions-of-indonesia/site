@@ -11,14 +11,14 @@ dependencies:
     specifier: ^0.11.0
     version: 0.11.0(solid-js@1.7.11)
   '@regions-of-indonesia/client':
-    specifier: ^5.1.1
-    version: 5.1.1
+    specifier: ^5.2.0
+    version: 5.2.0
   '@regions-of-indonesia/utils':
-    specifier: ^5.0.1
-    version: 5.0.1
+    specifier: ^5.1.0
+    version: 5.1.0
   astro:
-    specifier: ^3.0.12
-    version: 3.0.12
+    specifier: ^3.0.13
+    version: 3.0.13
   clsx:
     specifier: ^2.0.0
     version: 2.0.0
@@ -41,7 +41,7 @@ devDependencies:
     version: 3.0.1(solid-js@1.7.11)(vite@4.4.9)
   '@astrojs/tailwind':
     specifier: ^5.0.0
-    version: 5.0.0(astro@3.0.12)(tailwindcss@3.3.3)
+    version: 5.0.0(astro@3.0.13)(tailwindcss@3.3.3)
   '@coloradix/tailwindcss':
     specifier: ^1.5.0
     version: 1.5.0(@radix-ui/colors@2.1.0)(tailwindcss@3.3.3)
@@ -52,8 +52,8 @@ devDependencies:
     specifier: ^2.1.0
     version: 2.1.0
   '@regions-of-indonesia/types':
-    specifier: ^5.0.1
-    version: 5.0.1
+    specifier: ^5.1.0
+    version: 5.1.0
   astro-compress:
     specifier: ^2.0.15
     version: 2.0.15
@@ -81,13 +81,13 @@ packages:
   /@astrojs/internal-helpers@0.2.0:
     resolution: {integrity: sha512-NQ4ppp1CM0HNkKbJNM4saVSfmUYzGlRalF6wx7F6T/MYHYSWGuojY89/oFTy4t8VlOGUCUijlsVNNeziWaUo5g==}
 
-  /@astrojs/markdown-remark@3.1.0(astro@3.0.12):
+  /@astrojs/markdown-remark@3.1.0(astro@3.0.13):
     resolution: {integrity: sha512-5UwamK0iFxN0n1Nw44vUk8AkQr4psKS63hM3D1/4bhhjs4ZFRyrYmg5NjScaMEXZcrd2KgGPsd+PEwNs4mlBOw==}
     peerDependencies:
       astro: ^3.0.11
     dependencies:
       '@astrojs/prism': 3.0.0
-      astro: 3.0.12
+      astro: 3.0.13
       github-slugger: 2.0.0
       import-meta-resolve: 3.0.0
       rehype-raw: 6.1.1
@@ -129,13 +129,13 @@ packages:
       - vite
     dev: true
 
-  /@astrojs/tailwind@5.0.0(astro@3.0.12)(tailwindcss@3.3.3):
+  /@astrojs/tailwind@5.0.0(astro@3.0.13)(tailwindcss@3.3.3):
     resolution: {integrity: sha512-bMZZNNm/SW+ijUKMQDhdiuNWDdR3CubEKUHb2Ran4Arx1ikWn/kKIkFDXUV+MUnsLa7s19x9VMRlARRyKbqMkQ==}
     peerDependencies:
       astro: ^3.0.0
       tailwindcss: ^3.0.24
     dependencies:
-      astro: 3.0.12
+      astro: 3.0.13
       autoprefixer: 10.4.15(postcss@8.4.29)
       postcss: 8.4.29
       postcss-load-config: 4.0.1(postcss@8.4.29)
@@ -1019,16 +1019,19 @@ packages:
     resolution: {integrity: sha512-gcBnxjS2u2c6thQz/9K1+Pt2ZYcm5WKU4SLi0emYkRmYbVUw+37rlc5wgLtYOsSsRP9nxVtbJJYj6WVO7UUmZg==}
     dev: true
 
-  /@regions-of-indonesia/client@5.1.1:
-    resolution: {integrity: sha512-T1+SFAe4W6TKsgWjUzM6R2UBX8A9LGDVDq32xELSMDR0uUeoweAPCoDoWT2zC3++fQ0TvlDW8X/dhNknoRbjxQ==}
+  /@regions-of-indonesia/client@5.2.0:
+    resolution: {integrity: sha512-OvOWTGKuRzpUIYZL3Qq9+Dw3cYMzpU0D/SCOnyALFLJk/D4z/K5ST/Q00eoHfkJRyQBYFUsLUpuVWV4OLcyZjA==}
+    dependencies:
+      '@regions-of-indonesia/types': 5.1.0
     dev: false
 
-  /@regions-of-indonesia/types@5.0.1:
-    resolution: {integrity: sha512-uf8MB/0BgwQ+SdvgAR0E8KmFCKPSC8q4Hy2ubvaLm/NKJVfhkyjElXMBDwdWMq8qd9LRNtsezvkYG/saimEhHg==}
-    dev: true
+  /@regions-of-indonesia/types@5.1.0:
+    resolution: {integrity: sha512-CcpxM0//cxzY7IhDvHZ0N//gUQ2qIhCEkpV/y85Ml/TwLedJNwYI6ATlAsnJ287Nhx3h0cXcah9NOmZxL30lxA==}
 
-  /@regions-of-indonesia/utils@5.0.1:
-    resolution: {integrity: sha512-bFFdE6lWtlhaZzPQ6go7oQ0yDMO2/skqV8t8KC2MrbUGkbF3x451SZqDSFdzIIUtKLl1e6G1U//4Ru5v/UONeA==}
+  /@regions-of-indonesia/utils@5.1.0:
+    resolution: {integrity: sha512-5ZAG2OuSNYfkIglzAiFwKifh40Y6eal3R3z9JJNaRpL2a0G8AerJOkrR8fKVFowwTZS0n6E2OyRQnUnqaEkNJQ==}
+    dependencies:
+      '@regions-of-indonesia/types': 5.1.0
     dev: false
 
   /@solid-primitives/event-listener@2.3.0(solid-js@1.7.11):
@@ -1294,14 +1297,14 @@ packages:
       terser: 5.19.3
     dev: true
 
-  /astro@3.0.12:
-    resolution: {integrity: sha512-nDLI9OGEjYIX90a1Md1orqyurPxqXTWTy7Sm3ZsWl5dpzSjcUXo3VB/GTvNjAMS9sE40BOxhay7/hnnQuI8p7A==}
+  /astro@3.0.13:
+    resolution: {integrity: sha512-oZcDcoLsWG7SeltkJ33T/L5tcrsDDe5FLW9FxG1Z1NIwqOE321URLJVuse1WADGwBpMIVkWNibqv4wK2rxEnjw==}
     engines: {node: '>=18.14.1', npm: '>=6.14.0'}
     hasBin: true
     dependencies:
       '@astrojs/compiler': 2.1.0
       '@astrojs/internal-helpers': 0.2.0
-      '@astrojs/markdown-remark': 3.1.0(astro@3.0.12)
+      '@astrojs/markdown-remark': 3.1.0(astro@3.0.13)
       '@astrojs/telemetry': 3.0.1
       '@babel/core': 7.22.17
       '@babel/generator': 7.22.15
