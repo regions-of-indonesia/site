@@ -5,19 +5,19 @@ import plugin from "tailwindcss/plugin";
 
 import kobalte from "@kobalte/tailwindcss";
 
-import coloradix, { mauve, iris, red, green, yellow, blue } from "@coloradix/tailwindcss";
+import coloradix, { gray, mauve, red, green, yellow, blue } from "@coloradix/tailwindcss";
 
 const radix = coloradix({
+  gray,
   mauve,
-  iris,
   red,
   green,
   yellow,
   blue,
 })
   .alias({
-    neutral: "mauve",
-    primary: "iris",
+    neutral: "gray",
+    primary: "mauve",
     error: "red",
     success: "green",
     warning: "yellow",
