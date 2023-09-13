@@ -130,7 +130,7 @@ const Demo = () => {
 
   return (
     <div class="relative container mx-auto">
-      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-2 md:gap-4 xl:gap-6 p-1 md:p-2 xl:p-3">
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-2 md:gap-4 xl:gap-6">
         <RegionsSelect
           label="Provinces"
           placeholder="Select a province..."

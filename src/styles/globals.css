@@ -11,7 +11,7 @@ body {
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 0.5rem;
 }
 
 ::-webkit-scrollbar-track {
@@ -19,9 +19,17 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: hsl(var(--neutral-6));
+  background: hsl(var(--neutral-5));
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: hsl(var(--neutral-8));
+}
+
+::-moz-selection {
+  @apply bg-info-9 text-white;
+}
+
+::selection {
+  @apply bg-info-9 text-white;
 }
