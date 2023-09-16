@@ -15,6 +15,19 @@ const client = createStatic();
 
 type SelectItem = Region & { disabled?: boolean };
 
+const RegionsSelectClasses = {
+  content: clsx("bg-neutral-1 border-2 border-neutral-3 rounded-xl outline-none shadow overflow-hidden z-10", style["select__content"]),
+  item: clsx(
+    "relative flex items-center justify-between px-2 h-7 text-neutral-12 outline-none select-none rounded-lg",
+    style["select__item"]
+  ),
+  trigger: clsx(
+    "flex items-center justify-between px-4 py-0.5 w-full h-8 bg-neutral-1 text-neutral-11 border border-neutral-6 hover:border-neutral-7 outline-none rounded-xl focus-visible:ring-1 focus-visible:ring-offset-1 focus-visible:ring-offset-neutral-2 focus-visible:ring-neutral-10",
+    style["select__trigger"]
+  ),
+  value: clsx("overflow-ellipsis whitespace-nowrap overflow-hidden", style["select__value"]),
+};
+
 const RegionsSelect = (props: {
   label: string;
   options: SelectItem[];
@@ -32,13 +45,7 @@ const RegionsSelect = (props: {
       optionDisabled="disabled"
       placeholder={props.placeholder}
       itemComponent={(props) => (
-        <Select.Item
-          item={props.item}
-          class={clsx(
-            "relative flex items-center justify-between px-2 h-7 text-neutral-12 outline-none select-none rounded-lg",
-            style["select__item"]
-          )}
-        >
+        <Select.Item item={props.item} class={RegionsSelectClasses.item}>
           <Select.ItemLabel>{props.item.rawValue.name}</Select.ItemLabel>
           <Select.ItemIndicator class="flex items-center justify-center w-5 h-5">
             <CheckIcon />
@@ -46,16 +53,8 @@ const RegionsSelect = (props: {
         </Select.Item>
       )}
     >
-      <Select.Trigger
-        class={clsx(
-          "flex items-center justify-between px-4 py-0.5 w-full h-8 bg-neutral-1 text-neutral-11 border border-neutral-6 hover:border-neutral-7 outline-none rounded-xl focus-visible:ring-1 focus-visible:ring-offset-1 focus-visible:ring-offset-neutral-2 focus-visible:ring-neutral-10",
-          style["select__trigger"]
-        )}
-        aria-label={props.label}
-      >
-        <Select.Value<(typeof props.options)[number]>
-          class={clsx("overflow-ellipsis whitespace-nowrap overflow-hidden", style["select__value"])}
-        >
+      <Select.Trigger class={RegionsSelectClasses.trigger} aria-label={props.label}>
+        <Select.Value<(typeof props.options)[number]> class={RegionsSelectClasses.value}>
           {(state) => state.selectedOption().name}
         </Select.Value>
         <Select.Icon class="flex items-center justify-center w-5 h-5">
@@ -63,12 +62,7 @@ const RegionsSelect = (props: {
         </Select.Icon>
       </Select.Trigger>
       <Select.Portal>
-        <Select.Content
-          class={clsx(
-            "bg-neutral-1 border-2 border-neutral-3 rounded-xl outline-none shadow overflow-hidden z-10",
-            style["select__content"]
-          )}
-        >
+        <Select.Content class={RegionsSelectClasses.content}>
           <Select.Listbox class="overflow-y-auto max-h-64 p-2" />
         </Select.Content>
       </Select.Portal>
@@ -88,10 +82,7 @@ const Demo = () => {
       const item = selectedProvinceSelectItem();
       return item ? `districts/${item.code}` : null;
     },
-    (source) => {
-      const [, code] = source.split("/");
-      return client.district.find(code);
-    }
+    (source) => client.district.find(source.split("/")[1])
   );
   const [selectedDistrictSelectItem, setSelectedDistrictSelectItem] = createSignal<SelectItem | undefined>();
 
@@ -100,10 +91,7 @@ const Demo = () => {
       const item = selectedDistrictSelectItem();
       return item ? `subdistricts/${item.code}` : null;
     },
-    (source) => {
-      const [, code] = source.split("/");
-      return client.subdistrict.find(code);
-    }
+    (source) => client.subdistrict.find(source.split("/")[1])
   );
   const [selectedSubdistrictSelectItem, setSelectedSubdistrictSelectItem] = createSignal<SelectItem | undefined>();
 
@@ -112,10 +100,7 @@ const Demo = () => {
       const item = selectedSubdistrictSelectItem();
       return item ? `villages/${item.code}` : null;
     },
-    (source) => {
-      const [, code] = source.split("/");
-      return client.village.find(code);
-    }
+    (source) => client.village.find(source.split("/")[1])
   );
   const [selectedVillageSelectItem, setSelectedVillageSelectItem] = createSignal<SelectItem | undefined>();
 

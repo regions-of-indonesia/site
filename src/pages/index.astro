@@ -1,28 +1,17 @@
 ---
 import { GithubIcon } from "lucide-solid";
 
-import pixel from "~/const/pixel";
-
 import { HTMLX, Button, IconButton } from "~/components/core";
 
 import Demo from "~/components/other/Demo";
+import Pixel from "~/components/other/Pixel.astro";
 
 import { HOST } from "~/utils";
 ---
 
 <HTMLX>
   <div class="absolute inset-0 z-0 overflow-hidden">
-    {
-      pixel.map((el) => {
-        return (
-          <div class={"pxy"}>
-            {el.map((value) => (
-              <div class={`pxx pxx${value}`} />
-            ))}
-          </div>
-        );
-      })
-    }
+    <Pixel />
   </div>
 
   <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-7 z-10">

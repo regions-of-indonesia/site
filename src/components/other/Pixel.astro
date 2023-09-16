@@ -1,0 +1,15 @@
+---
+import pixel from "~/const/pixel";
+---
+
+{
+  pixel.map((el) => {
+    return (
+      <div class={"pxy"}>
+        {el.map((value) => (
+          <div class={`pxx pxx${value}`} />
+        ))}
+      </div>
+    );
+  })
+}
