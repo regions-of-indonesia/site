@@ -7,16 +7,16 @@
     "preview": "astro preview"
   },
   "dependencies": {
-    "@klass/core": "^3.3.5",
-    "@klass/solid": "^3.3.5",
+    "@klass/core": "^3.4.6",
+    "@klass/solid": "^3.4.6",
     "@kobalte/core": "^0.11.0",
     "@regions-of-indonesia/client": "^5.2.1",
     "@regions-of-indonesia/utils": "^5.1.1",
-    "astro": "^3.1.0",
+    "astro": "^3.1.1",
     "clsx": "^2.0.0",
-    "dayjs": "^1.11.9",
-    "lucide-solid": "^0.277.0",
-    "solid-js": "^1.7.11"
+    "dayjs": "^1.11.10",
+    "lucide-solid": "^0.279.0",
+    "solid-js": "^1.7.12"
   },
   "devDependencies": {
     "@astrojs/sitemap": "^3.0.0",
