@@ -17,12 +17,9 @@ type SelectItem = Region & { disabled?: boolean };
 
 const RegionsSelectClasses = {
   content: clsx("bg-neutral-1 border-2 border-neutral-3 rounded-xl outline-none shadow overflow-hidden z-10", style["select__content"]),
-  item: clsx(
-    "relative flex items-center justify-between px-2 h-7 text-neutral-12 outline-none select-none rounded-lg",
-    style["select__item"]
-  ),
+  item: clsx("relative flex items-center gap-1 px-2 h-7 text-neutral-12 outline-none select-none rounded-lg", style["select__item"]),
   trigger: clsx(
-    "flex items-center justify-between px-4 py-0.5 w-full h-8 bg-neutral-1 text-neutral-11 border border-neutral-6 hover:border-neutral-7 outline-none rounded-xl focus-visible:ring-1 focus-visible:ring-offset-1 focus-visible:ring-offset-neutral-2 focus-visible:ring-neutral-10",
+    "flex items-center justify-between gap-1 px-3 py-0.5 w-full h-8 bg-neutral-1 text-neutral-11 border border-neutral-6 hover:border-neutral-7 outline-none rounded-xl focus-visible:ring-1 focus-visible:ring-offset-1 focus-visible:ring-offset-neutral-2 focus-visible:ring-neutral-10",
     style["select__trigger"]
   ),
   value: clsx("overflow-ellipsis whitespace-nowrap overflow-hidden", style["select__value"]),
@@ -34,6 +31,7 @@ const RegionsSelect = (props: {
   value?: SelectItem;
   onChange: (value?: SelectItem) => void;
   placeholder?: string;
+  disabled?: boolean;
 }) => {
   return (
     <Select.Root
@@ -46,24 +44,24 @@ const RegionsSelect = (props: {
       placeholder={props.placeholder}
       itemComponent={(props) => (
         <Select.Item item={props.item} class={RegionsSelectClasses.item}>
-          <Select.ItemLabel>{props.item.rawValue.name}</Select.ItemLabel>
-          <Select.ItemIndicator class="flex items-center justify-center w-5 h-5">
+          <Select.ItemIndicator class="absolute left-2 flex items-center justify-center w-4 h-4">
             <CheckIcon />
           </Select.ItemIndicator>
+          <Select.ItemLabel class="pl-6">{props.item.rawValue.name}</Select.ItemLabel>
         </Select.Item>
       )}
     >
-      <Select.Trigger class={RegionsSelectClasses.trigger} aria-label={props.label}>
+      <Select.Trigger class={RegionsSelectClasses.trigger} aria-label={props.label} disabled={props.disabled}>
         <Select.Value<(typeof props.options)[number]> class={RegionsSelectClasses.value}>
           {(state) => state.selectedOption().name}
         </Select.Value>
-        <Select.Icon class="flex items-center justify-center w-5 h-5">
+        <Select.Icon class="flex items-center justify-center w-4 h-4">
           <ArrowUpDownIcon />
         </Select.Icon>
       </Select.Trigger>
       <Select.Portal>
         <Select.Content class={RegionsSelectClasses.content}>
-          <Select.Listbox class="overflow-y-auto max-h-64 p-2" />
+          <Select.Listbox class="overflow-y-auto max-h-64 p-1" />
         </Select.Content>
       </Select.Portal>
     </Select.Root>
@@ -115,7 +113,7 @@ const Demo = () => {
 
   return (
     <div class="relative container mx-auto">
-      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-2 md:gap-4 xl:gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-1 md:gap-3 xl:gap-5">
         <RegionsSelect
           label="Provinces"
           placeholder="Select a province..."
@@ -129,6 +127,7 @@ const Demo = () => {
           value={selectedDistrictSelectItem()}
           options={districtsOptions()}
           onChange={setSelectedDistrictSelectItem}
+          disabled={!selectedProvinceSelectItem()}
         />
         <RegionsSelect
           label="Subdistricts"
@@ -136,6 +135,7 @@ const Demo = () => {
           value={selectedSubdistrictSelectItem()}
           options={subdistrictsOptions()}
           onChange={setSelectedSubdistrictSelectItem}
+          disabled={!selectedDistrictSelectItem()}
         />
         <RegionsSelect
           label="Villages"
@@ -143,6 +143,7 @@ const Demo = () => {
           value={selectedVillageSelectItem()}
           options={villagesOptions()}
           onChange={setSelectedVillageSelectItem}
+          disabled={!selectedSubdistrictSelectItem()}
         />
       </div>
     </div>
