@@ -19,11 +19,11 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: hsl(var(--neutral-5));
+  background: rgb(var(--neutral-5));
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--neutral-8));
+  background: rgb(var(--neutral-8));
 }
 
 ::-moz-selection {

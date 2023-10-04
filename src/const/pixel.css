@@ -16,7 +16,7 @@
 }
 
 .pxx1 {
-  background-color: hsl(var(--shadow, var(--neutral-9)));
+  background-color: rgb(var(--shadow, var(--neutral-9)));
 }
 
 .pxx0 {
