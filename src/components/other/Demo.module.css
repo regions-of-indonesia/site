@@ -1,5 +1,5 @@
 .select__trigger {
-  @apply flex items-center justify-between gap-1 px-3 py-0.5 w-full h-8 bg-neutral-1 text-neutral-11 border border-neutral-6 hover:border-neutral-7 outline-none rounded-xl focus-visible:ring-1 focus-visible:ring-offset-1 focus-visible:ring-offset-neutral-2 focus-visible:ring-neutral-10;
+  @apply flex items-center justify-between gap-1 px-3 py-0.5 w-full h-8 bg-neutral-1 text-neutral-11 border border-neutral-6 hover:border-neutral-7 outline-none rounded-xl focus-visible:ring-1 focus-visible:ring-offset-1 focus-visible:ring-offset-neutral-1 focus-visible:ring-neutral-10;
   transition: border-color 250ms, color 250ms;
 
   &[data-disabled] {

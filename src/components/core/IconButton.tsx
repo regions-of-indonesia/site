@@ -6,7 +6,11 @@ type IconButtonVariants = VariantsOf<(typeof IconButton)["klass"]>;
 const IconButton = klassed(
   "button",
   {
-    base: "inline-flex items-center justify-center rounded-xl outline-none select-none focus-visible:ring-1 focus-visible:ring-offset-1 active:scale-95 transition-transform",
+    base: [
+      "inline-flex items-center justify-center rounded-xl outline-none select-none transition-transform",
+      "focus-visible:ring-1 focus-visible:ring-offset-1",
+      "active:scale-95",
+    ],
     variants: {
       color: {
         neutral: "",
@@ -30,24 +34,30 @@ const IconButton = klassed(
       {
         variant: "default",
         color: "neutral",
-        class: "bg-neutral-9 hover:bg-neutral-10 focus-visible:ring-offset-neutral-2 focus-visible:ring-neutral-10 text-white",
+        class: ["bg-neutral-9 text-white", "hover:bg-neutral-10", "focus-visible:ring-offset-neutral-1 focus-visible:ring-neutral-10"],
       },
       {
         variant: "default",
         color: "primary",
-        class: "bg-primary-9 hover:bg-primary-10 focus-visible:ring-offset-primary-2 focus-visible:ring-primary-10 text-white",
+        class: ["bg-primary-9 text-white", "hover:bg-primary-10", "focus-visible:ring-offset-primary-1 focus-visible:ring-primary-10"],
       },
       {
         variant: "outline",
         color: "neutral",
-        class:
-          "border border-neutral-6 hover:border-neutral-7 text-neutral-11 focus-visible:ring-offset-neutral-2 focus-visible:ring-neutral-10",
+        class: [
+          "border border-neutral-6 text-neutral-11",
+          "hover:border-neutral-7",
+          "focus-visible:ring-offset-neutral-1 focus-visible:ring-neutral-10",
+        ],
       },
       {
         variant: "outline",
         color: "primary",
-        class:
-          "border border-primary-6 hover:border-primary-7 text-primary-11 focus-visible:ring-offset-primary-2 focus-visible:ring-primary-10",
+        class: [
+          "border border-primary-6 text-primary-11",
+          "hover:border-primary-7",
+          "focus-visible:ring-offset-primary-1 focus-visible:ring-primary-10",
+        ],
       },
     ],
   },
