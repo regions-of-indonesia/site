@@ -1,4 +1,5 @@
 .select__trigger {
+  @apply flex items-center justify-between gap-1 px-3 py-0.5 w-full h-8 bg-neutral-1 text-neutral-11 border border-neutral-6 hover:border-neutral-7 outline-none rounded-xl focus-visible:ring-1 focus-visible:ring-offset-1 focus-visible:ring-offset-neutral-2 focus-visible:ring-neutral-10;
   transition: border-color 250ms, color 250ms;
 
   &[data-disabled] {
@@ -7,12 +8,15 @@
 }
 
 .select__value {
+  @apply overflow-ellipsis whitespace-nowrap overflow-hidden;
+
   &[data-placeholder-shown] {
     @apply text-neutral-11;
   }
 }
 
 .select__content {
+  @apply bg-neutral-1 border-2 border-neutral-3 rounded-xl outline-none shadow overflow-hidden z-10;
   transform-origin: var(--kb-select-content-transform-origin);
   animation: contentHide 100ms ease-in forwards;
 
@@ -22,6 +26,8 @@
 }
 
 .select__item {
+  @apply relative flex items-center gap-1 px-2 h-7 text-neutral-12 outline-none select-none rounded-lg;
+
   &[data-highlighted] {
     @apply bg-primary-9 text-white;
   }

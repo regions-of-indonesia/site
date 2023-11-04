@@ -2,28 +2,16 @@ import { createEffect, createMemo, createResource, createSignal, on } from "soli
 
 import { Select } from "@kobalte/core";
 
-import { ArrowUpDownIcon, CheckIcon } from "lucide-solid";
+import { CheckIcon, ChevronsUpDownIcon } from "lucide-solid";
 
 import type { Region } from "@regions-of-indonesia/types";
-import { createStatic } from "@regions-of-indonesia/client/lite";
-
-import clsx from "clsx";
+import { createDynamic } from "@regions-of-indonesia/client/lite";
 
 import style from "./Demo.module.css";
 
-const client = createStatic();
+const client = createDynamic();
 
 type SelectItem = Region & { disabled?: boolean };
-
-const RegionsSelectClasses = {
-  content: clsx("bg-neutral-1 border-2 border-neutral-3 rounded-xl outline-none shadow overflow-hidden z-10", style["select__content"]),
-  item: clsx("relative flex items-center gap-1 px-2 h-7 text-neutral-12 outline-none select-none rounded-lg", style["select__item"]),
-  trigger: clsx(
-    "flex items-center justify-between gap-1 px-3 py-0.5 w-full h-8 bg-neutral-1 text-neutral-11 border border-neutral-6 hover:border-neutral-7 outline-none rounded-xl focus-visible:ring-1 focus-visible:ring-offset-1 focus-visible:ring-offset-neutral-2 focus-visible:ring-neutral-10",
-    style["select__trigger"]
-  ),
-  value: clsx("overflow-ellipsis whitespace-nowrap overflow-hidden", style["select__value"]),
-};
 
 const RegionsSelect = (props: {
   label: string;
@@ -42,8 +30,9 @@ const RegionsSelect = (props: {
       optionTextValue="name"
       optionDisabled="disabled"
       placeholder={props.placeholder}
+      disallowEmptySelection
       itemComponent={(props) => (
-        <Select.Item item={props.item} class={RegionsSelectClasses.item}>
+        <Select.Item item={props.item} class={style["select__item"]}>
           <Select.ItemIndicator class="absolute left-2 flex items-center justify-center w-4 h-4">
             <CheckIcon />
           </Select.ItemIndicator>
@@ -51,16 +40,14 @@ const RegionsSelect = (props: {
         </Select.Item>
       )}
     >
-      <Select.Trigger class={RegionsSelectClasses.trigger} aria-label={props.label} disabled={props.disabled}>
-        <Select.Value<(typeof props.options)[number]> class={RegionsSelectClasses.value}>
-          {(state) => state.selectedOption().name}
-        </Select.Value>
+      <Select.Trigger class={style["select__trigger"]} aria-label={props.label} disabled={props.disabled}>
+        <Select.Value<(typeof props.options)[number]> class={style["select__value"]}>{(state) => state.selectedOption().name}</Select.Value>
         <Select.Icon class="flex items-center justify-center w-4 h-4">
-          <ArrowUpDownIcon />
+          <ChevronsUpDownIcon />
         </Select.Icon>
       </Select.Trigger>
       <Select.Portal>
-        <Select.Content class={RegionsSelectClasses.content}>
+        <Select.Content class={style["select__content"]}>
           <Select.Listbox class="overflow-y-auto max-h-64 p-1" />
         </Select.Content>
       </Select.Portal>
