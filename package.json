@@ -7,28 +7,28 @@
     "preview": "astro preview"
   },
   "dependencies": {
-    "@klass/core": "^3.4.11",
-    "@klass/solid": "^3.4.11",
-    "@kobalte/core": "^0.11.2",
+    "@klass/core": "4.0.0-next.11",
+    "@klass/solid": "4.0.0-next.11",
+    "@kobalte/core": "^0.12.1",
     "@regions-of-indonesia/client": "^5.2.2",
     "@regions-of-indonesia/utils": "^5.1.2",
-    "astro": "^4.1.2",
+    "astro": "^4.4.0",
     "clsx": "^2.1.0",
     "dayjs": "^1.11.10",
-    "lucide-solid": "^0.309.0",
-    "solid-js": "^1.8.10"
+    "lucide-solid": "^0.331.0",
+    "solid-js": "^1.8.15"
   },
   "devDependencies": {
-    "@astrojs/sitemap": "^3.0.4",
+    "@astrojs/sitemap": "^3.0.5",
     "@astrojs/solid-js": "^4.0.1",
     "@astrojs/tailwind": "^5.1.0",
     "@coloradix/tailwindcss": "^2.3.1",
     "@kobalte/tailwindcss": "^0.9.0",
     "@radix-ui/colors": "^3.0.0",
     "@regions-of-indonesia/types": "^5.1.2",
-    "astro-compress": "^2.2.7",
-    "autoprefixer": "^10.4.16",
-    "postcss": "^8.4.33",
+    "astro-compress": "^2.2.10",
+    "autoprefixer": "^10.4.17",
+    "postcss": "^8.4.35",
     "tailwindcss": "^3.4.1"
   }
 }

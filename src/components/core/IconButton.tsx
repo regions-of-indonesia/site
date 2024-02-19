@@ -25,40 +25,36 @@ const IconButton = klassed(
         outline: "",
       },
     },
-    defaultVariants: {
+    defaults: {
       color: "neutral",
       size: "md",
       variant: "default",
     },
-    compoundVariants: [
-      {
-        variant: "default",
-        color: "neutral",
-        class: ["bg-neutral-9 text-white", "hover:bg-neutral-10", "focus-visible:ring-offset-neutral-1 focus-visible:ring-neutral-10"],
-      },
-      {
-        variant: "default",
-        color: "primary",
-        class: ["bg-primary-9 text-white", "hover:bg-primary-10", "focus-visible:ring-offset-primary-1 focus-visible:ring-primary-10"],
-      },
-      {
-        variant: "outline",
-        color: "neutral",
-        class: [
+    compounds: [
+      [
+        { variant: "default", color: "neutral" },
+        ["bg-neutral-9 text-white", "hover:bg-neutral-10", "focus-visible:ring-offset-neutral-1 focus-visible:ring-neutral-10"],
+      ],
+      [
+        { variant: "default", color: "primary" },
+        ["bg-primary-9 text-white", "hover:bg-primary-10", "focus-visible:ring-offset-primary-1 focus-visible:ring-primary-10"],
+      ],
+      [
+        { variant: "outline", color: "neutral" },
+        [
           "border border-neutral-6 text-neutral-11",
           "hover:border-neutral-7",
           "focus-visible:ring-offset-neutral-1 focus-visible:ring-neutral-10",
         ],
-      },
-      {
-        variant: "outline",
-        color: "primary",
-        class: [
+      ],
+      [
+        { variant: "outline", color: "primary" },
+        [
           "border border-primary-6 text-primary-11",
           "hover:border-primary-7",
           "focus-visible:ring-offset-primary-1 focus-visible:ring-primary-10",
         ],
-      },
+      ],
     ],
   },
   {
